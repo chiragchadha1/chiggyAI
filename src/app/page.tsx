@@ -1,6 +1,7 @@
 import { LINKS, PROJECTS, EXPERIENCE, PHOTOS, PLAYLISTS } from "@/data/content";
 import { NowPlaying } from "@/components/now-playing";
 import { PhotoGallery } from "@/components/photo-lightbox";
+import { Logo } from "@/components/logo";
 
 function GithubIcon() {
   return (
@@ -31,9 +32,12 @@ export default function Home() {
     <main className="max-w-2xl mx-auto px-6 py-16 md:py-24 text-[15px] leading-relaxed">
       {/* ── Header ── */}
       <header>
-        <h1 className="text-xl font-semibold tracking-tight">
-          Chirag Chadha
-        </h1>
+        <div className="flex items-center gap-3">
+          <Logo />
+          <h1 className="text-xl font-semibold tracking-tight">
+            Chirag Chadha
+          </h1>
+        </div>
         <p className="mt-3 text-[var(--text-secondary)] leading-[1.75]">
           Software engineer, founder, DJ, and powerlifter in{" "}
           <span className="text-[var(--text)]">New York</span>. I&apos;ve
@@ -49,8 +53,9 @@ export default function Home() {
             HubSpot
           </a>{" "}
           on developer tooling during the day. After hours, I&apos;m usually
-          building something of my own. I love EDM, pretty much every genre
-          from Afrohouse to techno, and I&apos;m always looking to try new
+          building something of my own. I love EDM, everything from Afro, deep,
+          and tech house to techno, drum and bass, and everything in between.
+          I&apos;m always looking to try new
           restaurants around the city{" "}
           <span className="text-[var(--text-muted)]">
             (

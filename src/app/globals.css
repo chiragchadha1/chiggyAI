@@ -27,6 +27,41 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
+/* ── Logo ── */
+.logo-svg {
+  color: var(--text);
+}
+
+.logo-path {
+  stroke-dashoffset: 1px;
+  stroke-dasharray: 0 300px;
+  animation: logo-draw 1.2s ease forwards;
+}
+
+.logo-c2 {
+  animation-delay: 0.4s;
+}
+
+@keyframes logo-draw {
+  0% {
+    stroke-dasharray: 0 300px;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dasharray: 300px 0;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .logo-path {
+    animation: none !important;
+    stroke-dasharray: unset !important;
+  }
+}
+
 .inline-link {
   text-decoration: underline;
   text-decoration-color: var(--link-underline);
