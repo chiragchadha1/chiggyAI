@@ -27,6 +27,148 @@ body {
 
 a { color: inherit; text-decoration: none; }
 
+/* ── Hover image reveal ── */
+.hover-reveal {
+  color: var(--text);
+  cursor: default;
+  text-decoration: underline wavy;
+  text-decoration-color: var(--text-dim);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.2s;
+}
+.hover-reveal:hover {
+  text-decoration-color: var(--text-muted);
+}
+
+.hover-reveal-img {
+  position: fixed;
+  z-index: 200;
+  pointer-events: none;
+  width: 240px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  transform: translate(-50%, 0) rotate(-2deg);
+  animation: img-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes img-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px) rotate(-2deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) rotate(-2deg) scale(1);
+  }
+}
+
+/* ── Touch hover image reveal ── */
+.hover-reveal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightbox-open 0.25s ease;
+}
+
+.hover-reveal-img-touch {
+  width: 260px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: rotate(-2deg);
+  animation: img-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Social icon buttons ── */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  transition: color 0.15s, background 0.15s;
+}
+.social-icon:hover {
+  color: var(--text);
+  background: var(--hover-bg);
+}
+
+/* ── Availability badge ── */
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 6px 14px 6px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  background: rgba(34, 197, 94, 0.06);
+  border: 1px solid rgba(34, 197, 94, 0.18);
+  color: var(--text-secondary);
+}
+
+.availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.availability-detail {
+  color: var(--text-muted);
+}
+
+.availability-detail::before {
+  content: "·";
+  margin-right: 6px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+}
+
+/* ── Music block ── */
+.music-block {
+  padding-left: 30px;
+}
+
+/* ── Highlighted text ── */
+.highlight {
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ── Bio lines ── */
+.bio-line {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.bio-emoji {
+  flex-shrink: 0;
+  font-size: 15px;
+  width: 22px;
+  text-align: center;
+}
+
 /* ── Logo ── */
 .logo-svg {
   color: var(--text);
@@ -60,6 +202,24 @@ a { color: inherit; text-decoration: none; }
     animation: none !important;
     stroke-dasharray: unset !important;
   }
+  .gallery-item {
+    opacity: 1;
+    transform: none;
+    transition: box-shadow 0.3s ease;
+  }
+  .hover-reveal-img,
+  .hover-reveal-img-touch {
+    animation: none !important;
+  }
+  .now-playing-bars span {
+    animation: none !important;
+  }
+  .availability-dot {
+    animation: none !important;
+  }
+  .lightbox-overlay {
+    animation: none !important;
+  }
 }
 
 .inline-link {
@@ -77,6 +237,12 @@ a { color: inherit; text-decoration: none; }
   transition: background 0.2s ease;
 }
 .project-row:hover { background: var(--hover-bg); }
+
+.project-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
 
 .icon-link {
   display: inline-flex;
@@ -98,18 +264,42 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: baseline;
   gap: 8px;
-  padding: 7px 14px;
+  padding: 8px 14px;
   margin: 0 -14px;
   border-radius: 8px;
   transition: background 0.15s;
 }
 .exp-row:hover { background: var(--hover-bg); }
 
-.section-heading {
-  font-size: 13px;
-  font-weight: 500;
+.exp-org {
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 120px;
+  max-width: 160px;
+  flex-shrink: 0;
+  color: var(--text);
+}
+
+.exp-role {
+  font-size: 14px;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.exp-when {
+  font-size: 12px;
   color: var(--text-muted);
-  margin-bottom: 8px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.section-heading {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
 }
 
 /* ── Photo gallery (bento grid) ── */
@@ -241,8 +431,28 @@ a { color: inherit; text-decoration: none; }
   max-width: 1200px;
 }
 
+.lightbox-content::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: lightbox-spin 0.7s linear infinite;
+  z-index: 0;
+}
+
+@keyframes lightbox-spin {
+  to { transform: rotate(360deg); }
+}
+
 .lightbox-content img {
   object-fit: contain;
+  z-index: 1;
 }
 
 .lightbox-fade-in {
@@ -358,13 +568,9 @@ a { color: inherit; text-decoration: none; }
 
 .now-playing-idle {
   margin-top: 8px;
+  font-size: 13px;
   color: var(--text-muted);
-  padding: 6px 12px;
   cursor: default;
-}
-.now-playing-idle:hover {
-  background: var(--hover-bg);
-  color: var(--text-muted);
 }
 
 .now-playing-art {
@@ -407,3 +613,54 @@ a { color: inherit; text-decoration: none; }
   0%, 100% { transform: scaleY(1); }
   50% { transform: scaleY(0.4); }
 }
+
+/* ── Repo link pills ── */
+.repo-group {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.repo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 3px 10px 3px 8px;
+  border-radius: 6px;
+  background: var(--hover-bg);
+  transition: color 0.15s, background 0.15s;
+}
+.repo-link:hover {
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* ── Project status badges ── */
+.project-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.project-badge-active {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.project-badge-building {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.project-badge-completed {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
