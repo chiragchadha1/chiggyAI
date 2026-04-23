@@ -3,6 +3,7 @@ export const LINKS = [
   { label: "GitHub", href: "https://github.com/chiragchadha1" },
   { label: "LinkedIn", href: "https://linkedin.com/in/chiragkchadha" },
   { label: "Email", href: "mailto:hi@chiggy.ai" },
+  { label: "Resume", href: "/chirag-chadha-resume.pdf" },
 ] as const;
 
 export interface RepoLink {
@@ -21,7 +22,7 @@ export const PROJECTS: Project[] = [
   {
     name: "HubSpot",
     description:
-      "I work on HubSpot's developer tooling, primarily the CLI and the local development library. Over 4,000 developers use these tools every week. I've shipped the MCP server that brought us from 346 to 1,817 quarterly active developers, designed a new config system that replaced insecure YAML files with per-directory authentication (97% success rate, up from 65%), and migrated the entire logging layer across 161 files and 5,000 lines of code.",
+      "I work on HubSpot's developer tooling, primarily the CLI and the local development library. Over 4,000 developers use these tools every week. I've worked on the MCP server that brought us from 346 to 1,817 quarterly active developers, designed a new config system that replaced insecure YAML files with per-directory authentication (97% success rate, up from 65%), and migrated the entire logging layer across 161 files and 5,000 lines of code.",
     repos: [
       {
         name: "hubspot-cli",
@@ -56,7 +57,7 @@ export const PROJECTS: Project[] = [
   {
     name: "Howard Beach Bagel Cafe",
     description:
-      "A full-stack website for one of the best bagel spots in New York City. Designed and built end-to-end using agentic development workflows with Claude Code. Next.js, Framer Motion, and Vercel.",
+      "A full-stack website for my favorite bagel spot in NYC (totally unbiased). Designed and built end-to-end using agentic development workflows with Claude Code. Next.js, Framer Motion, and Vercel.",
     repos: [],
   },
   {
@@ -89,22 +90,30 @@ export const EXPERIENCE = [
 
 export interface Photo {
   src: string;
+  alt: string;
   size?: "wide" | "tall";
 }
 
 export const PHOTOS: Photo[] = [
-  { src: "chiggy - 60.jpeg", size: "wide" },
-  { src: "chiggy - 5.jpeg" },
-  { src: "chiggy - 42.jpeg", size: "tall" },
-  { src: "chiggy - 8.jpeg" },
-  { src: "chiggy - 30.jpeg" },
-  { src: "chiggy - 55.jpeg" },
-  { src: "chiggy - 85.jpeg", size: "wide" },
-  { src: "chiggy - 75.jpeg", size: "tall" },
-  { src: "chiggy - 70.jpeg" },
-  { src: "chiggy - 1.jpeg" },
-  { src: "chiggy - 52.jpeg" },
-  { src: "chiggy - 65.jpeg" },
+  { src: "dj-set-light-trails.webp", alt: "Chirag Chadha DJing with long exposure light trails", size: "wide" },
+  { src: "santorini-portrait.webp", alt: "Chirag Chadha in Santorini, Greece" },
+  { src: "fushimi-inari-torii-gates.webp", alt: "Fushimi Inari torii gates in Kyoto, Japan", size: "tall" },
+  { src: "pena-palace-sintra.webp", alt: "Pena Palace in Sintra, Portugal" },
+  { src: "emirates-first-class.webp", alt: "Emirates first class cabin" },
+  { src: "venice-bridge-of-sighs.webp", alt: "View from the Bridge of Sighs in Venice, Italy" },
+  { src: "graduation-cap-toss.webp", alt: "Chirag Chadha tossing graduation cap at Northeastern University", size: "tall" },
+  { src: "wagyu-beef.webp", alt: "Wagyu beef in Tokyo, Japan" },
+  { src: "concert-blue-lights.webp", alt: "Music festival with blue industrial lighting", size: "tall" },
+  { src: "polignano-a-mare-portrait.webp", alt: "Chirag Chadha in Polignano a Mare, Italy" },
+  { src: "sagrada-familia-barcelona.webp", alt: "Sagrada Familia in Barcelona, Spain" },
+  { src: "vinyl-collection.webp", alt: "Vinyl record collection and coffee table books" },
+  { src: "cabo-resort-pool-night.webp", alt: "Resort pool at night in Cabo San Lucas, Mexico" },
+  { src: "sf-chinatown-lanterns.webp", alt: "Red lanterns in San Francisco Chinatown" },
+  { src: "belem-tower-sunset.webp", alt: "Belem Tower at sunset in Lisbon, Portugal", size: "tall" },
+  { src: "amalfi-coast.webp", alt: "Positano from the sea on the Amalfi Coast, Italy" },
+  { src: "dj-set-solo.webp", alt: "Chirag Chadha behind the decks DJing" },
+  { src: "miami-street-portrait.webp", alt: "Chirag Chadha on a street in Miami, Florida" },
+  { src: "lisbon-rooftops-sunset.webp", alt: "Lisbon rooftops at sunset, Portugal" },
 ];
 
 export const PLAYLISTS = [

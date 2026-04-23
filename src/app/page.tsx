@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { LINKS, PROJECTS, EXPERIENCE, PHOTOS, PLAYLISTS } from "@/data/content";
 import { NowPlaying } from "@/components/now-playing";
+import { PhotoGallery } from "@/components/photo-lightbox";
 
 function GithubIcon() {
   return (
@@ -28,7 +28,7 @@ function SpotifyIcon() {
 
 export default function Home() {
   return (
-    <div className="max-w-2xl mx-auto px-6 py-16 md:py-24 text-[15px] leading-relaxed">
+    <main className="max-w-2xl mx-auto px-6 py-16 md:py-24 text-[15px] leading-relaxed">
       {/* ── Header ── */}
       <header>
         <h1 className="text-xl font-semibold tracking-tight">
@@ -158,22 +158,7 @@ export default function Home() {
       </section>
 
       <div className="gallery-wrap">
-        <div className="gallery">
-          {PHOTOS.map((photo, i) => (
-            <div
-              key={`photo-${i}`}
-              className={`gallery-item${photo.size === "wide" ? " gallery-wide" : ""}${photo.size === "tall" ? " gallery-tall" : ""}`}
-            >
-              <Image
-                src={`/images/${photo.src}`}
-                alt=""
-                fill
-                sizes={photo.size === "wide" ? "(max-width: 768px) 100vw, 640px" : "(max-width: 768px) 50vw, 320px"}
-                quality={75}
-              />
-            </div>
-          ))}
-        </div>
+        <PhotoGallery photos={PHOTOS} />
       </div>
 
       {/* ── Into ── */}
@@ -273,6 +258,6 @@ export default function Home() {
       <footer className="mt-14 pt-5 border-t border-[var(--divider)] text-xs text-[var(--text-muted)]">
         Chirag Chadha · NYC · 2026
       </footer>
-    </div>
+    </main>
   );
 }
