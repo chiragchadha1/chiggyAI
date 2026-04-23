@@ -1,30 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# chiggy.ai
 
-## Getting Started
+My personal website. Built with Next.js, Tailwind CSS, and deployed on Vercel.
 
-First, run the development server:
+**Live at [chiggy.ai](https://chiggy.ai)**
+
+## Features
+
+- Hover-to-reveal images on desktop, tap-to-reveal on mobile
+- Spotify "Now Playing" integration via the Spotify API
+- Bento photo gallery with lightbox and 3D tilt on hover
+- Animated CC monogram logo
+- SEO with JSON-LD structured data
+
+## Setup
 
 ```bash
-bun dev
+npm install
+cp .env.local.example .env.local
+# Fill in Spotify credentials (see .env.local.example for instructions)
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js](https://nextjs.org) 16
+- [Tailwind CSS](https://tailwindcss.com) v4
+- [Vercel](https://vercel.com) for hosting
+- [Spotify Web API](https://developer.spotify.com/documentation/web-api) for now playing

@@ -24,6 +24,14 @@ export const metadata: Metadata = {
     siteName: "Chirag Chadha",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Chirag Chadha - Software Engineer, Founder, DJ in New York",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -31,6 +39,7 @@ export const metadata: Metadata = {
     description:
       "Software engineer at HubSpot, founder of Chiggy AI, and DJ based in New York City.",
     creator: "@chiggyio",
+    images: ["/og.png"],
   },
   robots: {
     index: true,
