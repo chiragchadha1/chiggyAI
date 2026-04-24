@@ -3,6 +3,7 @@ import { NowPlaying } from "@/components/now-playing";
 import { PhotoGallery } from "@/components/photo-lightbox";
 import { Logo } from "@/components/logo";
 import { HoverImage } from "@/components/hover-image";
+import { CopyEmail } from "@/components/copy-email";
 
 function XIcon() {
   return (
@@ -60,12 +61,20 @@ function NpmIconSmall() {
   );
 }
 
-function LinkIcon() {
+function GlobeIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
-      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-      <polyline points="15 3 21 3 21 9" />
-      <line x1="10" y1="14" x2="21" y2="3" />
+    <svg viewBox="0 0 15 15" fill="none" className="w-3 h-3" aria-hidden="true">
+      <path d="M7.49996 1.80002C4.35194 1.80002 1.79996 4.352 1.79996 7.50002C1.79996 10.648 4.35194 13.2 7.49996 13.2C10.648 13.2 13.2 10.648 13.2 7.50002C13.2 4.352 10.648 1.80002 7.49996 1.80002ZM0.899963 7.50002C0.899963 3.85494 3.85488 0.900024 7.49996 0.900024C11.145 0.900024 14.1 3.85494 14.1 7.50002C14.1 11.1451 11.145 14.1 7.49996 14.1C3.85488 14.1 0.899963 11.1451 0.899963 7.50002Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd" />
+      <path d="M13.4999 7.89998H1.49994V7.09998H13.4999V7.89998Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd" />
+      <path d="M7.09991 13.5V1.5H7.89991V13.5H7.09991zM10.375 7.49998C10.375 5.32724 9.59364 3.17778 8.06183 1.75656L8.53793 1.24341C10.2396 2.82218 11.075 5.17273 11.075 7.49998C11.075 9.82724 10.2396 12.1778 8.53793 13.7566L8.06183 13.2434C9.59364 11.8222 10.375 9.67273 10.375 7.49998ZM3.99969 7.5C3.99969 5.17611 4.80786 2.82678 6.45768 1.24719L6.94177 1.7528C5.46186 3.17323 4.69969 5.32389 4.69969 7.5C4.69969 9.67611 5.46186 11.8268 6.94177 13.2472L6.45768 13.7528C4.80786 12.1732 3.99969 9.82389 3.99969 7.5Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd" />
+    </svg>
+  );
+}
+
+function ArrowUpRight() {
+  return (
+    <svg viewBox="0 0 15 15" fill="none" className="w-3 h-3" aria-hidden="true">
+      <path d="M3.64645 11.3536C3.45118 11.1583 3.45118 10.8417 3.64645 10.6465L10.2929 4L6 4C5.72386 4 5.5 3.77614 5.5 3.5C5.5 3.22386 5.72386 3 6 3L11.5 3C11.6326 3 11.7598 3.05268 11.8536 3.14645C11.9473 3.24022 12 3.36739 12 3.5L12 9C12 9.27614 11.7761 9.5 11.5 9.5C11.2239 9.5 11 9.27614 11 9L11 4.70711L4.35355 11.3536C4.15829 11.5488 3.84171 11.5488 3.64645 11.3536Z" fill="currentColor" fillRule="evenodd" clipRule="evenodd" />
     </svg>
   );
 }
@@ -80,18 +89,21 @@ function RepoLinks({ repos }: { repos: import("@/data/content").RepoLink[] }) {
             <a href={repo.github} target="_blank" rel="noreferrer" className="repo-link">
               <GithubIconSmall />
               {repo.name}
+              <ArrowUpRight />
             </a>
           )}
           {repo.npm && (
             <a href={repo.npm} target="_blank" rel="noreferrer" className="repo-link">
               <NpmIconSmall />
               {repo.name}
+              <ArrowUpRight />
             </a>
           )}
           {repo.link && (
             <a href={repo.link} target="_blank" rel="noreferrer" className="repo-link">
-              <LinkIcon />
+              <GlobeIcon />
               {repo.name}
+              <ArrowUpRight />
             </a>
           )}
         </span>
@@ -113,8 +125,10 @@ export default function Home() {
         </div>
 
         <div className="availability">
-          <span className="availability-dot" />
-          <span>Open to new opportunities</span>
+          <span className="availability-main">
+            <span className="availability-dot" />
+            Open to new opportunities
+          </span>
           <span className="availability-detail">in-person or hybrid in NYC</span>
         </div>
 
@@ -161,17 +175,19 @@ export default function Home() {
           </div>
           <p className="bio-line">
             <span className="bio-emoji">&#x1F35C;</span>
-            <span>Always hunting for the best <HoverImage src="/images/nyc-burger-egg.webp" alt="NYC restaurant">restaurants</HoverImage> in New York. Right now it&apos;s <HoverImage src="/images/ci-siamo-birthday.webp" alt="Birthday dinner at Ci Siamo"><a href="https://www.cisiamonyd.com/" target="_blank" rel="noreferrer" className="inline-link text-[var(--text)]">Ci Siamo</a></HoverImage>. <span className="text-[var(--text-muted)]">(<a href="https://beliapp.com/app/chirag" target="_blank" rel="noreferrer" className="inline-link text-[var(--text-muted)]">@chirag on Beli</a>)</span></span>
+            <span>Always hunting for the best <HoverImage src="/images/nyc-burger-egg.webp" alt="NYC restaurant">restaurants</HoverImage> in New York. Right now it&apos;s <HoverImage src="/images/ci-siamo-birthday.webp" alt="Birthday dinner at Ci Siamo">Ci Siamo</HoverImage>. <span className="text-[var(--text-muted)]">(<a href="https://beliapp.com/app/chirag" target="_blank" rel="noreferrer" className="inline-link text-[var(--text-muted)]">@chirag on Beli</a>)</span></span>
           </p>
         </div>
 
         {/* ── CTA ── */}
-        <p className="mt-6 text-[var(--text-secondary)] text-sm leading-[1.75]">
-          Email me at{" "}
-          <a href="mailto:hi@chiggy.ai" className="inline-link text-[var(--text)] font-medium">hi@chiggy.ai</a>{" "}
-          or find me on{" "}
-          <a href="https://x.com/chiggyio" target="_blank" rel="noreferrer" className="inline-link text-[var(--text)]">X</a>.
-        </p>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <CopyEmail email="hi@chiggy.ai" />
+          <span className="text-xs text-[var(--text-muted)]">or</span>
+          <a href="https://x.com/chiggyio" target="_blank" rel="noreferrer" className="cta-secondary">
+            find me on X
+            <ArrowUpRight />
+          </a>
+        </div>
 
         {/* ── Social + Resume ── */}
         <div className="mt-3 flex items-center gap-3">
@@ -207,7 +223,7 @@ export default function Home() {
                   </span>
                 )}
               </div>
-              <p className="mt-0.5 text-xs text-[var(--text-muted)]">
+              <p className="mt-0.5 text-xs text-[var(--text-muted)] font-mono tracking-tight">
                 {entry.role} · {entry.when}
               </p>
               <p className="mt-1.5 text-sm text-[var(--text-secondary)] leading-[1.7]">

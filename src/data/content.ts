@@ -139,6 +139,10 @@ export const PHOTOS: Photo[] = [
   { src: "vinyl-collection.webp", alt: "Vinyl record collection and coffee table books" },
   { src: "sf-chinatown-lanterns.webp", alt: "Red lanterns in San Francisco Chinatown" },
   { src: "belem-tower-sunset.webp", alt: "Belem Tower at sunset in Lisbon, Portugal", size: "tall" },
+  { src: "miami-street-portrait.webp", alt: "Chirag Chadha on a street in Miami, Florida" },
+  { src: "lisbon-rooftops-sunset.webp", alt: "Lisbon rooftops at sunset, Portugal" },
+  { src: "cabo-resort-pool-night.webp", alt: "Resort pool at night in Cabo San Lucas, Mexico" },
+  { src: "venice-bridge-of-sighs.webp", alt: "View from the Bridge of Sighs in Venice, Italy" },
 ];
 
 export const PLAYLISTS = [

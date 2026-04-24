@@ -2,6 +2,7 @@
 
 @theme inline {
   --font-body: var(--font-hanken);
+  --font-mono: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
 }
 
 :root {
@@ -74,17 +75,32 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: lightbox-open 0.25s ease;
+  animation: touch-overlay-in 0.2s ease;
+}
+
+@keyframes touch-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .hover-reveal-img-touch {
-  width: 260px;
-  height: 300px;
+  width: 240px;
+  height: 280px;
   object-fit: cover;
   border-radius: 14px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  transform: rotate(-2deg);
-  animation: img-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: touch-img-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes touch-img-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* ── Social icon buttons ── */
@@ -117,6 +133,23 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-secondary);
 }
 
+@media (max-width: 480px) {
+  .availability {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 8px 14px 8px 10px;
+    border-radius: 14px;
+  }
+  .availability-detail {
+    padding-left: 15px;
+    font-size: 12px;
+  }
+  .availability-detail::before {
+    display: none;
+  }
+}
+
 .availability-dot {
   width: 7px;
   height: 7px;
@@ -124,6 +157,13 @@ a { color: inherit; text-decoration: none; }
   background: #22c55e;
   flex-shrink: 0;
   animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.availability-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
 }
 
 .availability-detail {
@@ -613,6 +653,82 @@ a { color: inherit; text-decoration: none; }
   0%, 100% { transform: scaleY(1); }
   50% { transform: scaleY(0.4); }
 }
+
+/* ── Copy email button ── */
+.copy-email {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: #0a0a0a;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  overflow: hidden;
+}
+.copy-email:hover { background: #262626; }
+.copy-email:active { transform: scale(0.96); }
+
+.copy-email-layer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.25s, transform 0.25s, filter 0.25s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.copy-email-hidden {
+  opacity: 0;
+  transform: scale(0.9);
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.copy-email-abs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-email-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── CTA secondary link ── */
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--hover-bg);
+  border: 1px solid var(--divider);
+  transition: background 0.15s, border-color 0.15s;
+}
+.cta-secondary:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+.cta-secondary:active { transform: scale(0.96); }
 
 /* ── Repo link pills ── */
 .repo-group {
