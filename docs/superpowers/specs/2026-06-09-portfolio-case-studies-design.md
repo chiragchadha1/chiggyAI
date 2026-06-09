@@ -222,3 +222,22 @@ the build; pages degrade gracefully and media slots fill in later.
 - Real media capture (slots ready).
 - Per-project OG images.
 - Optional web `/resume` page (keep PDF link for now).
+
+### Planned follow-up: AI discoverability / GEO (not this phase)
+
+Make Chirag findable via Google, LinkedIn, LLMs, and inbound sourcing tools. Design the
+content/structure now so this layers on cleanly later. Candidate work:
+
+- Rich, per-page structured data (JSON-LD `Person` + `CreativeWork`/`SoftwareSourceCode`
+  per case study; `BreadcrumbList`).
+- `llms.txt` / machine-readable summary endpoint; clean canonical URLs + sitemap (already
+  in scope).
+- Per-case OG images and strong meta descriptions written for both humans and LLM
+  snippeting.
+- Plain-language, fact-dense prose (entities, metrics, role keywords) that LLMs can
+  attribute correctly; consistent name + handle usage across pages.
+- Cross-linking to authoritative profiles (GitHub, LinkedIn, X) and from them back to
+  chiggy.ai.
+
+This phase should keep copy fact-dense and entity-rich so the GEO follow-up is mostly
+additive (structured data + assets), not a rewrite.
