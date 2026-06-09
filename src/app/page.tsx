@@ -58,10 +58,10 @@ export default function Home() {
           <section id="about" className="content-section">
             <div className="about-hero">
               <div className="about-hero-text load-stagger">
-                <h1 className="hero-title load-item" style={{ ["--i" as string]: 1 }}>
+                <h2 className="hero-title load-item" style={{ ["--i" as string]: 1 }}>
                   I build <span className="highlight">developer tools</span> and{" "}
                   <span className="highlight">AI-native products</span>, and I ship them fast.
-                </h1>
+                </h2>
                 <p className="hero-intro load-item" style={{ ["--i" as string]: 2 }}>
                   Software engineer, founder, <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>, and <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage> in New York. I&apos;ve been designing and building things since I was 15.
                 </p>
