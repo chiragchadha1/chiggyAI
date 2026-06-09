@@ -1,0 +1,69 @@
+export const meta = {
+  slug: "hubspot",
+  title: "HubSpot",
+  kind: "experience",
+  org: "HubSpot",
+  role: "Software Engineer, Developer Experience",
+  when: "2024 -",
+  status: "active",
+  order: 1,
+  tagline:
+    "Developer tools used by 4,000+ developers every week, and the MCP server that grew the community 425%.",
+  metrics: [
+    { value: "+425%", label: "quarterly active developers", sub: "346 to 1,817, 72% week-4 retention" },
+    { value: "4,000+", label: "developers every week" },
+    { value: "97%", label: "config success rate", sub: "up from 65% on the legacy flow" },
+    { value: "161", label: "files in the logging refactor" },
+  ],
+  stack: ["TypeScript", "Node", "React Ink", "MCP", "Claude Code"],
+  links: [
+    {
+      name: "hubspot-cli",
+      npm: "https://www.npmjs.com/package/@hubspot/cli",
+      github: "https://github.com/HubSpot/hubspot-cli",
+    },
+    {
+      name: "local-dev-lib",
+      npm: "https://www.npmjs.com/package/@hubspot/local-dev-lib",
+      github: "https://github.com/HubSpot/hubspot-local-dev-lib",
+    },
+  ],
+};
+
+## The problem
+
+HubSpot's developer platform is built and extended through the command line. As AI coding
+agents took off, developers scattered across Claude Code, Cursor, Codex, Gemini, and
+Windsurf, and none of those agents could actually talk to HubSpot. The tooling also carried
+years of debt: an insecure config format, inconsistent logging, and an onboarding flow that
+quietly failed for roughly a third of new developers.
+
+## What I built
+
+I joined as a co-op and converted to full-time on the Developer Experience team. My biggest
+win was a Model Context Protocol server that lets agents drive the HubSpot platform
+directly, then the integrations that shipped it across all five major editors and agents.
+
+Alongside it I championed a config overhaul that replaced the insecure `hubspot.yml` with a
+structured settings model, designed the core logging abstraction that touched 161 files,
+and built the release-management CLI commands that replaced the deprecated deploy path. I
+also modernized the CLI from yargs to React Ink and migrated the logging system across the
+whole codebase, around 5,000 lines, semi-automated with Claude Code.
+
+<Code lang="ts" file="logger.ts">{`// one logging abstraction, adopted across 161 files
+const logger = createLogger("project:upload");
+
+logger.debug("starting upload", { account, projectName });
+try {
+  await uploadProject(account, projectName);
+  logger.success("upload complete");
+} catch (err) {
+  logger.error(err, { hint: "run hs project logs for details" });
+}`}</Code>
+
+## Impact
+
+The MCP server grew the developer community from 346 to 1,817 quarterly active developers,
+a 425% jump with 72% week-4 retention. The config overhaul moved first-run success from 65%
+to 97%. Tooling I own ships to more than 4,000 developers every week. The work put me on a
+senior-engineer track, owning ambiguous, multi-repo projects end to end.

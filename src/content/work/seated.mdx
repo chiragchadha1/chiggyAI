@@ -1,0 +1,57 @@
+export const meta = {
+  slug: "seated",
+  title: "Seated",
+  kind: "project",
+  role: "Prototype",
+  when: "2026",
+  status: "completed",
+  order: 3,
+  tagline:
+    "A real-time booking engine for impossible-to-get NYC restaurant tables. Built it, shipped it, shut it down.",
+  metrics: [
+    { value: "<2s", label: "from drop to booked" },
+    { value: "50+", label: "people in my DMs overnight" },
+    { value: "1 week", label: "from prototype to paying customers" },
+  ],
+  stack: ["TypeScript", "Playwright", "REST", "Stripe", "Supabase"],
+  visual: "presolve-timeline",
+  links: [],
+  // Seated's technical content describes booking-automation techniques that run against a
+  // third-party platform's terms of service. Set `hidden: true` to pull it from the public
+  // site (homepage, sitemap, static generation, and the route all respect this flag).
+  hidden: false,
+};
+
+## The problem
+
+The best tables in NYC open and vanish in seconds. I wanted to learn to code something
+genuinely hard, so I started building a bot that could grab them the instant they dropped.
+
+## What I built
+
+It started as a slow browser-automation script. The competitive drops demanded speed, so I
+reverse-engineered the booking flow into an API-first tool and added a pre-solve trick
+borrowed from sneaker bots: prepare the slow verification step a minute ahead of the drop,
+cache the result, then fire the booking the instant the table opened.
+
+<Diagram name="presolve-timeline" />
+
+That took bookings down to under two seconds from drop time. Around the engine I built a
+real dashboard: login, customer profiles, request management, and Stripe authorization holds
+that only charge on a successful booking.
+
+<Code lang="ts" file="presolve.ts">{`// solve the slow check ahead of time, then fire the instant the table drops
+const token = await presolveChallenge();        // ~30s, done at T-60s
+await waitUntil(dropTime);                       // hold the cached token
+const table = await book({ slot, token });       // fires in < 2s at T-0`}</Code>
+
+## What happened
+
+One friend's Instagram story brought 50+ people into my DMs overnight, and I had paying
+customers within the week. Instant product-market fit.
+
+## Lessons
+
+The platform risk caught up with me, so I shut it down while it was still working. The build
+proved I could ship something people wanted, fast. The shutdown taught the harder lesson:
+some things you build in private, and knowing when to walk away is its own skill.

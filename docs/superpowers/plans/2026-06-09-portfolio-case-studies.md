@@ -714,6 +714,22 @@ git add src/components/site-header.tsx src/components/case-study/shell.tsx src/a
 
 ## Phase E — View transitions
 
+> **IMPLEMENTATION NOTE (revised approach):** React 19.2.4 does not export `ViewTransition`
+> and Next's `experimental.viewTransition` only integrates that React component, so the
+> originally-planned React `<ViewTransition>` morph is unavailable on the pinned versions.
+> We use **native cross-document (MPA) View Transitions** instead:
+> - Navigation to `/work/[slug]` uses plain `<a>` (hard nav to a static page), not `<Link>`.
+> - `globals.css` adds `@view-transition { navigation: auto; }`.
+> - The morphing title carries `style={{ viewTransitionName: \`work-${slug}\` }}` on BOTH
+>   the homepage row and the detail `<h1>`; the shared header carries
+>   `viewTransitionName: "site-header"`.
+> - `::view-transition-old/new(root)` keyframes provide the crossfade; matching
+>   `view-transition-name`s auto-morph the title; the header is pinned (`animation: none`).
+> - Remove `experimental.viewTransition` from `next.config.ts` (inert here).
+> - No React `ViewTransition` import anywhere; no `unstable_ViewTransition`.
+> The shell (Task 13) and CaseStudyLink (Task 15) reflect this (inline
+> `viewTransitionName` style instead of the React component).
+
 ### Task 15: `CaseStudyLink` row wrapper
 
 **Files:** Create `src/components/case-study-link.tsx`

@@ -1,0 +1,50 @@
+export const meta = {
+  slug: "chiggyos",
+  title: "chiggyOS",
+  kind: "project",
+  role: "Personal infrastructure",
+  when: "2026 -",
+  status: "building",
+  order: 1,
+  tagline:
+    "An AI-native operating system for my life. A second brain that actually remembers what I told it last week.",
+  metrics: [
+    { value: "5", label: "layers of memory" },
+    { value: "daily", label: "journal + transcript ingest" },
+    { value: "live", label: "demoed in real interviews" },
+  ],
+  stack: ["Obsidian", "Claude Code", "Markdown", "Cron"],
+  visual: "memory-layers",
+  links: [],
+};
+
+## The problem
+
+AI models change constantly, but my context should not have to. I wanted a foundational
+infrastructure layer for my life that I own, where I can plug and play whatever model I use
+and never lose what I have already taught it.
+
+## What I built
+
+chiggyOS runs on Obsidian and Claude Code, modeling human memory across five layers:
+procedural rules, semantic knowledge, episodic journals, a working-memory crash buffer, and
+an identity layer.
+
+<Diagram name="memory-layers" />
+
+Every day it ingests my journal entries, meeting transcripts, and voice notes, then
+synthesizes them into a searchable, interconnected wiki. An autonomous agent runs the whole
+thing on a server, handling email, tasks, and calendar on top of the same memory.
+
+<Code lang="ts" file="absorb.ts">{`// nightly: read new raw sources, synthesize into the wiki
+for (const source of await newSourcesSince(lastRun)) {
+  const meaning = await interpret(source); // what does this mean?
+  await wiki.integrate(meaning);           // connect it to what I know
+}
+await memory.checkpoint();                  // crash-buffer for the next session`}</Code>
+
+## Impact
+
+It is the system I use every day, and it became a live conversation piece in interviews. I
+have installed and debugged the agent on screen mid-interview, with it pulling my own
+context out of the vault in real time. No static demo could replicate that.

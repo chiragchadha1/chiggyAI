@@ -780,3 +780,323 @@ a { color: inherit; text-decoration: none; }
   color: #6366f1;
 }
 
+/* ── Shared anchored header (view-transition continuity) ── */
+.site-header {
+  view-transition-name: site-header;
+}
+.site-header-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.15s;
+  margin-bottom: 28px;
+}
+.site-header-back:hover {
+  color: var(--text);
+}
+.site-header-arrow {
+  display: inline-flex;
+  color: var(--text-muted);
+  transition: transform 0.2s, color 0.15s;
+}
+.site-header-back:hover .site-header-arrow {
+  transform: translateX(-2px);
+  color: var(--text);
+}
+.site-header-name {
+  letter-spacing: -0.01em;
+}
+
+/* ── Homepage case study rows ── */
+.cs-row {
+  display: block;
+  cursor: pointer;
+}
+.cs-row-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  opacity: 0.55;
+  transition: opacity 0.2s, color 0.2s, transform 0.2s;
+}
+.cs-row:hover .cs-row-cue {
+  opacity: 1;
+  color: var(--text);
+  transform: translateX(2px);
+}
+.cs-row-tagline {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Metric strip ── */
+.metric-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 32px;
+  margin-top: 22px;
+  margin-bottom: 8px;
+}
+.metric {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.metric-visible {
+  opacity: 1;
+  transform: none;
+}
+.metric-value {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.metric-label {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.3;
+}
+.metric-sub {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* ── Case study page ── */
+.cs-header {
+  margin-top: 8px;
+}
+.cs-title {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  line-height: 1.1;
+}
+.cs-tagline {
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.cs-meta {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.cs-body {
+  margin-top: 28px;
+}
+.cs-h2 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 36px 0 10px;
+}
+.cs-body > .cs-h2:first-child {
+  margin-top: 0;
+}
+.cs-h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 24px 0 8px;
+}
+.cs-p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin: 12px 0;
+}
+.cs-ul,
+.cs-ol {
+  margin: 12px 0;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.7;
+}
+.cs-li {
+  margin: 5px 0;
+}
+.cs-strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.cs-quote {
+  margin: 16px 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--divider);
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ── Stack chips ── */
+.cs-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 32px;
+}
+.cs-chip {
+  font-size: 12px;
+  color: var(--text-secondary);
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: var(--hover-bg);
+  border: 1px solid var(--divider);
+}
+.cs-links {
+  margin-top: 16px;
+}
+.cs-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--divider);
+  font-size: 13px;
+}
+
+/* ── Code blocks (Shiki) ── */
+.cs-code {
+  margin: 20px 0;
+  border: 1px solid var(--divider);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--hover-bg);
+}
+.cs-code-file {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--divider);
+}
+.cs-code-body {
+  overflow-x: auto;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+.cs-code-body pre {
+  margin: 0;
+  padding: 14px;
+  background: transparent !important;
+}
+.cs-code-body code {
+  font-family: var(--font-mono);
+}
+
+/* ── Figures / media slots ── */
+.cs-figure {
+  margin: 22px 0;
+}
+.cs-figure-media {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--divider);
+  display: block;
+}
+.cs-figure-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  border: 1px dashed var(--divider);
+  background: var(--hover-bg);
+  color: var(--text-dim);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+.cs-figure-caption {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ── Diagrams ── */
+.cs-diagram {
+  margin: 24px 0;
+}
+.diagram-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Callout ── */
+.cs-callout {
+  margin: 20px 0;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--hover-bg);
+  border: 1px solid var(--divider);
+}
+.cs-callout-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.cs-callout-body {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+.cs-callout-body p:first-child {
+  margin-top: 0;
+}
+.cs-callout-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Native cross-document view transitions ── */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-group(root) {
+  animation-duration: 0.35s;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
