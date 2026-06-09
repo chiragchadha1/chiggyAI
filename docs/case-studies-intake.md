@@ -1,11 +1,18 @@
 # Case Studies — Content Intake
 
-> **Status (2026-06-09):** The case-study system is built and live in the codebase. All 7
-> case studies are written from the vault and render at `/work/[slug]` with metrics,
-> diagrams, code, and view-transition navigation. What remains is *your* enrichment:
-> confirm/refine copy, add real screenshots + recordings, and make the Seated
-> launch-visibility call. Edit any case study at `src/content/work/<slug>.mdx`. Drop media
-> in `public/images/work/<slug>/` and reference it with `<Figure src="..." />`.
+> **Status (2026-06-09, iteration 2):** The site is substantially built and richer now.
+> Homepage has a bold hero + portrait + ⌘K command palette + live clock; case studies are
+> enriched from the vault (publish-safe), with diagrams, real code, and view-transition
+> navigation. Live-site screenshots are in for Chiggy AI (defye.us), Generate
+> (generatenu.com), and Bagel Cafe (hbbagelcafe.com). GEO is live: `/llms.txt`, keyword
+> metadata, JSON-LD, and dynamic per-case OG images.
+>
+> What still helps from you: (1) real product screenshots/recordings for **HubSpot** (MCP
+> in action), **chiggyOS** (the vault/wiki), **Anlyst** (MVP), and **Couplet**; (2) confirm
+> the hero portrait (currently `santorini-portrait.webp`, swap in `src/app/page.tsx`);
+> (3) the **Seated** launch-visibility call; (4) sanity-check any metric you'd rather not
+> publish. Edit a case study at `src/content/work/<slug>.mdx`; drop media in
+> `public/images/work/<slug>/` and reference it with `<Figure src="..." />`.
 
 
 This is the living checklist for making each case study impressive. Fill in what you can,

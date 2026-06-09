@@ -45,7 +45,11 @@ export default async function Image({
             color: "#999",
           }}
         >
-          <span style={{ fontWeight: 600, color: "#1a1a1a" }}>Chirag Chadha</span>
+          <span style={{ display: "flex", alignItems: "center" }}>
+            <span style={{ fontWeight: 600, color: "#1a1a1a" }}>Chirag Chadha</span>
+            <span style={{ margin: "0 12px" }}>·</span>
+            <span>chiggy.ai</span>
+          </span>
           <span style={{ letterSpacing: 2 }}>{kind}</span>
         </div>
 
@@ -74,16 +78,13 @@ export default async function Image({
           </div>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div style={{ display: "flex", gap: 56 }}>
-            {metrics.map((m) => (
-              <div key={m.label} style={{ display: "flex", flexDirection: "column" }}>
-                <span style={{ fontSize: 46, fontWeight: 700, color: "#111" }}>{m.value}</span>
-                <span style={{ fontSize: 22, color: "#999", marginTop: 4 }}>{m.label}</span>
-              </div>
-            ))}
-          </div>
-          <span style={{ fontSize: 24, color: "#999" }}>chiggy.ai</span>
+        <div style={{ display: "flex", gap: 64 }}>
+          {metrics.map((m) => (
+            <div key={m.label} style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontSize: 46, fontWeight: 700, color: "#111" }}>{m.value}</span>
+              <span style={{ fontSize: 22, color: "#999", marginTop: 4 }}>{m.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     ),
