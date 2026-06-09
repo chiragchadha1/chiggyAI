@@ -1,5 +1,13 @@
 # Case Studies — Content Intake
 
+> **Status (2026-06-09):** The case-study system is built and live in the codebase. All 7
+> case studies are written from the vault and render at `/work/[slug]` with metrics,
+> diagrams, code, and view-transition navigation. What remains is *your* enrichment:
+> confirm/refine copy, add real screenshots + recordings, and make the Seated
+> launch-visibility call. Edit any case study at `src/content/work/<slug>.mdx`. Drop media
+> in `public/images/work/<slug>/` and reference it with `<Figure src="..." />`.
+
+
 This is the living checklist for making each case study impressive. Fill in what you can,
 when you can. The single highest-leverage items are **real screenshots/recordings** and
 **confirmed public links**. Everything here is optional per-project — the page degrades
