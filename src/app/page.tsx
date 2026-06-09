@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/site-header";
 import { HoverImage } from "@/components/hover-image";
 import { CopyEmail } from "@/components/copy-email";
 import { CaseStudyLink } from "@/components/case-study-link";
+import { LocalTime } from "@/components/local-time";
 import { XIcon, GithubIcon, LinkedInIcon, SpotifyIcon, ArrowUpRight } from "@/components/icons";
 
 export default function Home() {
@@ -150,8 +151,9 @@ export default function Home() {
       </div>
 
       {/* ── Footer ── */}
-      <footer className="mt-14 pt-5 border-t border-[var(--divider)] text-xs text-[var(--text-muted)]">
-        Chirag Chadha · NYC · 2026
+      <footer className="mt-14 pt-5 border-t border-[var(--divider)] text-xs text-[var(--text-muted)] flex items-center justify-between">
+        <span>Chirag Chadha · 2026</span>
+        <LocalTime />
       </footer>
     </main>
   );

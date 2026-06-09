@@ -1215,6 +1215,23 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 0;
 }
 
+/* ── Local time footer ── */
+.local-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.local-time-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-dim);
+}
+.local-time-clock {
+  font-family: var(--font-mono);
+}
+
 /* ── Command palette ── */
 .cmdk-launcher {
   position: fixed;
