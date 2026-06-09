@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
+
+const noopSubscribe = () => () => {};
+const isMacSnapshot = () =>
+  /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+const isMacServerSnapshot = () => true;
 
 /** Floating pill that opens the command palette. Shows the platform-correct shortcut. */
 export function CommandLauncher() {
-  const [mac, setMac] = useState(true);
-
-  useEffect(() => {
-    setMac(/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent));
-  }, []);
+  const mac = useSyncExternalStore(noopSubscribe, isMacSnapshot, isMacServerSnapshot);
 
   return (
     <button

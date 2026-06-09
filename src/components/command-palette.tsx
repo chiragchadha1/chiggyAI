@@ -107,8 +107,6 @@ export function CommandPalette({
     };
   }, [open]);
 
-  useEffect(() => setActive(0), [query]);
-
   const onListKey = useCallback(
     (e: React.KeyboardEvent) => {
       if (e.key === "ArrowDown") {
@@ -132,8 +130,6 @@ export function CommandPalette({
 
   if (!open) return null;
 
-  let lastGroup = "";
-
   return (
     <div className="cmdk-overlay" onClick={close} role="presentation">
       <div
@@ -149,15 +145,17 @@ export function CommandPalette({
           className="cmdk-input"
           placeholder="Jump to a project, copy email, open a link..."
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setActive(0);
+          }}
         />
         <div className="cmdk-list" ref={listRef}>
           {filtered.length === 0 && (
             <div className="cmdk-empty">No matches</div>
           )}
           {filtered.map((item, i) => {
-            const showGroup = item.group !== lastGroup;
-            lastGroup = item.group;
+            const showGroup = i === 0 || filtered[i - 1].group !== item.group;
             return (
               <div key={item.id}>
                 {showGroup && <div className="cmdk-group">{item.group}</div>}

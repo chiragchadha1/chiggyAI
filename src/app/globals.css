@@ -22,6 +22,8 @@ body {
   background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
+  /* room so the floating command launcher never sits on top of the footer */
+  padding-bottom: 60px;
 }
 
 ::selection { background: rgba(0, 0, 0, 0.07); }
