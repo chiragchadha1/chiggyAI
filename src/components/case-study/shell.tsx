@@ -66,6 +66,8 @@ export function CaseStudyShell({
       )}
 
       <footer className="cs-footer">
+        {/* Intentional plain <a> for native cross-document view transition (see SiteHeader). */}
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a href="/" className="inline-link">
           &larr; back to home
         </a>

@@ -1,5 +1,5 @@
 const LAYERS = [
-  { name: "Identity", sub: "persona anchor — who I am" },
+  { name: "Identity", sub: "persona anchor, who I am" },
   { name: "Semantic", sub: "stable facts, people, projects" },
   { name: "Episodic", sub: "daily journals & session digests" },
   { name: "Working", sub: "cross-session crash buffer" },
