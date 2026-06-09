@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
+import { CommandMenu } from "@/components/command-menu";
+import { CommandLauncher } from "@/components/command-launcher";
 
 const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
@@ -113,6 +115,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-full font-[family-name:var(--font-hanken)]">
         {children}
+        <CommandLauncher />
+        <CommandMenu />
       </body>
     </html>
   );

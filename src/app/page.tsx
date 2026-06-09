@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PHOTOS, PLAYLISTS } from "@/data/content";
 import { projects, experience } from "@/content/work";
 import { NowPlaying } from "@/components/now-playing";
@@ -15,19 +16,38 @@ export default function Home() {
       <header>
         <SiteHeader />
 
-        <div className="availability">
-          <span className="availability-main">
-            <span className="availability-dot" />
-            Open to new opportunities
-          </span>
-          <span className="availability-detail">in-person or hybrid in NYC</span>
+        {/* ── Hero ── */}
+        <div className="hero">
+          <div className="hero-text">
+            <p className="hero-kicker">Software Engineer · Founder · NYC</p>
+            <h2 className="hero-title">
+              I build <span className="highlight">developer tools</span> and{" "}
+              <span className="highlight">AI-native products</span>, and I ship them fast.
+            </h2>
+            <p className="hero-intro">
+              Software engineer, founder, <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>, and <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage> in New York. I&apos;ve been designing and building things since I was 15.
+            </p>
+            <div className="availability">
+              <span className="availability-main">
+                <span className="availability-dot" />
+                Open to new opportunities
+              </span>
+              <span className="availability-detail">in-person or hybrid in NYC</span>
+            </div>
+          </div>
+          <div className="hero-portrait">
+            <Image
+              src="/images/santorini-portrait.webp"
+              alt="Chirag Chadha"
+              width={320}
+              height={400}
+              priority
+              className="hero-portrait-img"
+            />
+          </div>
         </div>
 
-        <p className="mt-4 text-[var(--text-secondary)] leading-[1.75]">
-          Software engineer, founder, <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>, and <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage> in <span className="highlight">New York</span>. I&apos;ve been designing and building things since I was 15.
-        </p>
-
-        <div className="mt-5 space-y-2">
+        <div className="mt-8 space-y-2">
           <p className="bio-line">
             <span className="bio-emoji">&#x1F6E0;&#xFE0F;</span>
             <span>Building developer tools at <a href="https://hubspot.com" target="_blank" rel="noreferrer" className="inline-link text-[var(--text)]">HubSpot</a> that <span className="highlight">4,000+ developers</span> use every week</span>
