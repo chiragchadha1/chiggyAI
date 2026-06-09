@@ -32,9 +32,11 @@ an identity layer.
 
 <Diagram name="memory-layers" />
 
-Every day it ingests my journal entries, meeting transcripts, and voice notes, then
-synthesizes them into a searchable, interconnected wiki. An autonomous agent runs the whole
-thing on a server, handling email, tasks, and calendar on top of the same memory.
+Raw, messy inputs (voice-to-text dumps, web clips, meeting transcripts, daily notes) are
+treated as immutable sources. A nightly "absorb" pass reads anything new, asks what it
+means and how it connects, and writes the distilled signal into a flat, link-navigated wiki.
+Absorbed sources are relocated, never edited, so the history stays intact and the inbox
+stays clean.
 
 <Code lang="ts" file="absorb.ts">{`// nightly: read new raw sources, synthesize into the wiki
 for (const source of await newSourcesSince(lastRun)) {
@@ -42,6 +44,24 @@ for (const source of await newSourcesSince(lastRun)) {
   await wiki.integrate(meaning);           // connect it to what I know
 }
 await memory.checkpoint();                  // crash-buffer for the next session`}</Code>
+
+The whole system is operated like a CLI through a custom `/wiki` skill (`absorb`, `query`,
+`cleanup`, `breakdown`, `brief`, `digest`, `resume`), and versioned with a deliberate
+push-only git model so it never fights live cross-device sync.
+
+## The autonomous agent
+
+An autonomous chief-of-staff agent (codename Atlas) runs the system on a remote server. It
+acts proactively on top of the same memory: ingesting journals, managing email, tasks, and
+calendar, and reporting through a Telegram interface. Three cron jobs drive it (a nightly
+ingest plus morning and weekend briefings), and its persona lives in a single
+source-of-truth file so its behavior is versioned and portable across models.
+
+<Callout label="The thesis">
+AI models change constantly, so the durable value is the foundational layer you own. Keep
+the memory in plain text, treat the model as a swappable component, and you never have to
+rebuild your context again.
+</Callout>
 
 ## Impact
 

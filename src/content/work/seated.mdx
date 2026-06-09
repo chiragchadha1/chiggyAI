@@ -29,16 +29,18 @@ genuinely hard, so I started building a bot that could grab them the instant the
 
 ## What I built
 
-It started as a slow browser-automation script. The competitive drops demanded speed, so I
-reverse-engineered the booking flow into an API-first tool and added a pre-solve trick
-borrowed from sneaker bots: prepare the slow verification step a minute ahead of the drop,
-cache the result, then fire the booking the instant the table opened.
+It started as a slow browser-automation script (Playwright). The competitive drops demanded
+speed, so I profiled the network traffic and re-architected it into an API-first tool, then
+added a pre-solve timing technique: prepare the slow verification step a minute ahead of the
+drop, cache the result, then fire the booking the instant the table opened.
 
 <Diagram name="presolve-timeline" />
 
 That took bookings down to under two seconds from drop time. Around the engine I built a
-real dashboard: login, customer profiles, request management, and Stripe authorization holds
-that only charge on a successful booking.
+real product: login and customer profiles, CRUD request management, a customer intake form,
+and Stripe authorization holds that only charge on a successful booking and release on
+failure. It went from a rough script to a CLI tool to a full-stack service in a short
+window.
 
 <Code lang="ts" file="presolve.ts">{`// solve the slow check ahead of time, then fire the instant the table drops
 const token = await presolveChallenge();        // ~30s, done at T-60s
@@ -52,6 +54,9 @@ customers within the week. Instant product-market fit.
 
 ## Lessons
 
-The platform risk caught up with me, so I shut it down while it was still working. The build
-proved I could ship something people wanted, fast. The shutdown taught the harder lesson:
-some things you build in private, and knowing when to walk away is its own skill.
+<Callout label="What it taught me">
+Building something people want is necessary but not sufficient. Sustainability and risk
+management matter just as much as shipping. The model carried platform risk that made it
+hard to scale responsibly, so I wound it down as a deliberate decision, and it reshaped how
+I think about building durable products.
+</Callout>

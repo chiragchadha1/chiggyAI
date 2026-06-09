@@ -44,11 +44,17 @@ I joined as a co-op and converted to full-time on the Developer Experience team.
 win was a Model Context Protocol server that lets agents drive the HubSpot platform
 directly, then the integrations that shipped it across all five major editors and agents.
 
-Alongside it I championed a config overhaul that replaced the insecure `hubspot.yml` with a
-structured settings model, designed the core logging abstraction that touched 161 files,
-and built the release-management CLI commands that replaced the deprecated deploy path. I
-also modernized the CLI from yargs to React Ink and migrated the logging system across the
-whole codebase, around 5,000 lines, semi-automated with Claude Code.
+I also led the CLI's largest architectural project: a multi-repo overhaul of configuration
+management (`hs account link`) that replaced the insecure `hubspot.yml` with a structured
+`.hs/settings.json` model. I built the proof of concept, drove team buy-in, partnered with
+design on the UX, and applied seven design patterns (SRP, IoC, CQS, SoC, OCP, DRY, ISP) in
+the refactor, then broke a 3,800-line change into four cleanly reviewable pieces.
+
+Alongside it I designed the core logging abstraction and migrated it across 161 files and
+roughly 5,000 lines, modernized the CLI from yargs to React Ink (owning the Table and List
+components in v8), and built the release-management command suite (`hs project release
+create / list / info`, plus a `--preview` flag on `hs project upload`) that replaced the
+deprecated deploy path.
 
 <Code lang="ts" file="logger.ts">{`// one logging abstraction, adopted across 161 files
 const logger = createLogger("project:upload");
@@ -61,9 +67,19 @@ try {
   logger.error(err, { hint: "run hs project logs for details" });
 }`}</Code>
 
+## Going agent-first
+
+I now drive the "Agent First CLI" direction: rethinking the `hs` CLI as a deterministic
+surface that AI agents (not just humans) can call, and re-architecting the CLI and
+local-dev-lib repos to be agent-agnostic across tools like Claude Code and Codex. I also
+build internal developer-productivity automation, including a custom triage skill that
+closed 36 long-stale GitHub issues in a single session, and proactively measured the
+platform's agent-readiness by scoring our developer docs and surfacing the gaps.
+
 ## Impact
 
 The MCP server grew the developer community from 346 to 1,817 quarterly active developers,
 a 425% jump with 72% week-4 retention. The config overhaul moved first-run success from 65%
-to 97%. Tooling I own ships to more than 4,000 developers every week. The work put me on a
-senior-engineer track, owning ambiguous, multi-repo projects end to end.
+to 97%. Tooling I own ships to more than 4,000 developers every week, across the CLI,
+local-dev-lib, and the VS Code extension. The work put me on a senior-engineer track,
+owning ambiguous, multi-repo projects end to end.
