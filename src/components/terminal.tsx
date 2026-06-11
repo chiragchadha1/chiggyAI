@@ -244,7 +244,7 @@ export function Terminal({ items }: { items: TerminalWorkItem[] }) {
         <span className="terminal-dot" />
         <span className="terminal-dot" />
         <span className="terminal-dot" />
-        <span className="terminal-bar-title">guest@chiggy.ai — zsh</span>
+        <span className="terminal-bar-title">guest@chiggy.ai · zsh</span>
       </div>
       <div ref={bodyRef} className="terminal-body">
         <div className="term-out term-welcome">
