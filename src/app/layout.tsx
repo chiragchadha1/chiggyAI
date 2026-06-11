@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { CommandMenu } from "@/components/command-menu";
-import { CommandLauncher } from "@/components/command-launcher";
+import { HintBar } from "@/components/hint-bar";
 import { ConsoleSignature } from "@/components/console-signature";
 
 const hanken = Hanken_Grotesk({
@@ -10,6 +10,16 @@ const hanken = Hanken_Grotesk({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf9f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#151310" },
+  ],
+};
+
+/** Runs before paint so the saved theme never flashes. */
+const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}})()`;
 
 export const metadata: Metadata = {
   title: "Chirag Chadha | Software Engineer, Founder, DJ in New York",
@@ -82,7 +92,11 @@ function JsonLd() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://chiggy.ai/#person",
     name: "Chirag Chadha",
+    givenName: "Chirag",
+    familyName: "Chadha",
+    alternateName: ["Chirag K Chadha", "chiggy", "chiggyio"],
     url: "https://chiggy.ai",
     email: "hi@chiggy.ai",
     jobTitle: "Software Engineer",
@@ -107,6 +121,10 @@ function JsonLd() {
       "https://x.com/chiggyio",
       "https://github.com/chiragchadha1",
       "https://linkedin.com/in/chiragkchadha",
+      "https://instagram.com/chiragcchadha",
+      "https://instagram.com/chiggylifts",
+      "https://tiktok.com/@chiragcchadha",
+      "https://beliapp.com/app/chirag",
     ],
     hasOccupation: [
       {
@@ -177,7 +195,17 @@ function JsonLd() {
     keywords:
       "AI agents, personal knowledge management, Obsidian, agent workflows, second brain, MCP, AI-native tooling",
   };
-  const schemas = [personSchema, organizationSchema, chiggyOsSchema];
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://chiggy.ai/#website",
+    name: "Chirag Chadha",
+    alternateName: "chiggy.ai",
+    url: "https://chiggy.ai",
+    publisher: { "@id": "https://chiggy.ai/#person" },
+  };
+
+  const schemas = [personSchema, organizationSchema, chiggyOsSchema, websiteSchema];
 
   return (
     <>
@@ -198,13 +226,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${hanken.variable} h-full`}>
+    <html lang="en" className={`${hanken.variable} h-full`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <JsonLd />
       </head>
       <body className="min-h-full font-[family-name:var(--font-hanken)]">
         {children}
-        <CommandLauncher />
+        <HintBar />
         <CommandMenu />
         <ConsoleSignature />
       </body>

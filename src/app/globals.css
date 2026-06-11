@@ -13,8 +13,31 @@
   --divider: rgba(40, 30, 15, 0.07);
   --bg: #faf9f6;
   --hover-bg: rgba(40, 30, 15, 0.035);
+  --chip-hover: rgba(0, 0, 0, 0.05);
+  --chip-hover-border: rgba(0, 0, 0, 0.12);
+  --jump-nav-bg: rgba(255, 255, 255, 0.34);
+  --float-bg: rgba(255, 255, 255, 0.8);
+  --selection: rgba(0, 0, 0, 0.07);
   --link-underline: #ccc;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --text: #f0eee8;
+  --text-secondary: #b8b2a7;
+  --text-muted: #958f82;
+  --text-dim: #58534b;
+  --divider: rgba(240, 238, 232, 0.09);
+  --bg: #151310;
+  --hover-bg: rgba(240, 238, 232, 0.05);
+  --chip-hover: rgba(240, 238, 232, 0.09);
+  --chip-hover-border: rgba(240, 238, 232, 0.16);
+  --jump-nav-bg: rgba(240, 238, 232, 0.05);
+  --float-bg: rgba(32, 29, 25, 0.82);
+  --selection: rgba(240, 238, 232, 0.16);
+  --link-underline: #57524a;
+  color-scheme: dark;
 }
 
 html { scroll-behavior: smooth; }
@@ -27,7 +50,7 @@ body {
   padding-bottom: 60px;
 }
 
-::selection { background: rgba(0, 0, 0, 0.07); }
+::selection { background: var(--selection); }
 
 a { color: inherit; text-decoration: none; }
 
@@ -597,7 +620,7 @@ a { color: inherit; text-decoration: none; }
   transition: background 0.15s, color 0.15s;
 }
 .now-playing:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--chip-hover);
   color: var(--text);
 }
 
@@ -658,14 +681,14 @@ a { color: inherit; text-decoration: none; }
   border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
-  color: #fff;
-  background: #0a0a0a;
+  color: var(--bg);
+  background: var(--text);
   border: none;
   cursor: pointer;
   transition: background 0.15s;
   overflow: hidden;
 }
-.copy-email:hover { background: #262626; }
+.copy-email:hover { background: color-mix(in oklab, var(--text), var(--bg) 16%); }
 .copy-email:active { transform: scale(0.96); }
 
 .copy-email-layer {
@@ -720,8 +743,8 @@ a { color: inherit; text-decoration: none; }
   transition: background 0.15s, border-color 0.15s;
 }
 .cta-secondary:hover {
-  background: rgba(0, 0, 0, 0.05);
-  border-color: rgba(0, 0, 0, 0.12);
+  background: var(--chip-hover);
+  border-color: var(--chip-hover-border);
 }
 .cta-secondary:active { transform: scale(0.96); }
 
@@ -744,7 +767,7 @@ a { color: inherit; text-decoration: none; }
 }
 .repo-link:hover {
   color: var(--text);
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--chip-hover);
 }
 
 /* ── Project status badges ── */
@@ -886,7 +909,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0 14px;
   border-radius: 999px;
   border: 1px solid var(--divider);
-  background: rgba(255, 255, 255, 0.34);
+  background: var(--jump-nav-bg);
   color: var(--text-secondary);
   font-size: 13px;
   font-weight: 500;
@@ -1423,6 +1446,17 @@ a { color: inherit; text-decoration: none; }
 .cs-code-body code {
   font-family: var(--font-mono);
 }
+/* Shiki dual themes: flip every token to its dark variant */
+[data-theme="dark"] .cs-code-body .shiki,
+[data-theme="dark"] .cs-code-body .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+[data-theme="dark"] .terminal {
+  border-color: rgba(240, 238, 232, 0.16);
+}
 
 /* ── Figures / media slots ── */
 .cs-figure {
@@ -1452,6 +1486,22 @@ a { color: inherit; text-decoration: none; }
   font-size: 12px;
   color: var(--text-muted);
   text-align: center;
+}
+
+/* ── Case-study page width: readable text measure, media breaks out wider ── */
+.cs-page {
+  max-width: 720px;
+}
+@media (min-width: 1024px) {
+  .cs-page .cs-diagram,
+  .cs-page .cs-figure,
+  .cs-page .cs-body pre {
+    margin-left: -72px;
+    margin-right: -72px;
+  }
+  .cs-page {
+    max-width: 760px;
+  }
 }
 
 /* ── Diagrams ── */
@@ -1674,7 +1724,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── Command palette ── */
-.cmdk-launcher {
+.hint-bar {
   position: fixed;
   bottom: 20px;
   left: 50%;
@@ -1683,11 +1733,16 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+.hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 8px 12px 8px 14px;
   border-radius: 999px;
   font-size: 13px;
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--float-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--divider);
@@ -1695,18 +1750,35 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s, color 0.2s;
 }
-.cmdk-launcher:hover {
-  transform: translateX(-50%) translateY(-2px);
+.hint-pill:hover {
+  transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   color: var(--text);
 }
-.cmdk-launcher-dot {
+.hint-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: #22c55e;
 }
-.cmdk-launcher-kbd {
+.hint-label {
+  animation: hint-swap 0.35s var(--ease-out);
+}
+.hint-label-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+@keyframes hint-swap {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hint-kbd {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
@@ -1714,6 +1786,37 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--divider);
   border-radius: 5px;
   padding: 1px 6px;
+}
+.hint-theme {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background: var(--float-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--divider);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s;
+}
+.hint-theme:hover {
+  transform: translateY(-2px);
+  color: var(--text);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hint-label {
+    animation: none;
+  }
+}
+/* Keyboard shortcut chip means nothing on touch devices */
+@media (pointer: coarse) {
+  .hint-kbd {
+    display: none;
+  }
 }
 
 .cmdk-overlay {
@@ -1738,7 +1841,7 @@ a { color: inherit; text-decoration: none; }
   max-height: 60vh;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--bg);
   border: 1px solid var(--divider);
   border-radius: 14px;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);

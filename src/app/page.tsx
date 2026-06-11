@@ -13,6 +13,16 @@ import { Reveal } from "@/components/reveal";
 import { Terminal } from "@/components/terminal";
 import { XIcon, GithubIcon, LinkedInIcon, SpotifyIcon, ArrowUpRight } from "@/components/icons";
 
+const profilePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://chiggy.ai/#profile",
+  url: "https://chiggy.ai",
+  name: "Chirag Chadha",
+  mainEntity: { "@id": "https://chiggy.ai/#person" },
+  isPartOf: { "@id": "https://chiggy.ai/#website" },
+};
+
 export default function Home() {
   const terminalItems = [...experience(), ...projects()].map(({ meta }) => ({
     slug: meta.slug,
@@ -23,6 +33,10 @@ export default function Home() {
 
   return (
     <main className="home">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
+      />
       <div className="home-grid">
         {/* ── Identity rail ── */}
         <aside className="rail">

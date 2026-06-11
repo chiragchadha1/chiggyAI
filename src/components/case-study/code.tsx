@@ -15,7 +15,8 @@ export async function Code({
 }) {
   const html = await codeToHtml(children.trim(), {
     lang,
-    theme: "github-light",
+    themes: { light: "github-light", dark: "github-dark" },
+    defaultColor: "light",
   });
 
   return (
