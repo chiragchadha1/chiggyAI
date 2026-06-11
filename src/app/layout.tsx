@@ -27,6 +27,8 @@ export const metadata: Metadata = {
     "developer experience",
     "AI engineer",
     "AI agents",
+    "agentic software",
+    "AI-native developer tools",
     "Model Context Protocol",
     "MCP",
     "TypeScript",
@@ -83,6 +85,8 @@ function JsonLd() {
     url: "https://chiggy.ai",
     email: "hi@chiggy.ai",
     jobTitle: "Software Engineer",
+    description:
+      "New York-based software engineer at HubSpot and founder of Chiggy AI. Builds developer tools, agent workflows, MCP systems, and zero-to-one products.",
     worksFor: {
       "@type": "Organization",
       name: "HubSpot",
@@ -103,6 +107,20 @@ function JsonLd() {
       "https://github.com/chiragchadha1",
       "https://linkedin.com/in/chiragkchadha",
     ],
+    hasOccupation: [
+      {
+        "@type": "Occupation",
+        name: "Software Engineer",
+        skills: "TypeScript, React, Next.js, Node.js, AI agents, Model Context Protocol, developer tools, developer experience",
+      },
+      {
+        "@type": "Occupation",
+        name: "Founder",
+        skills: "AI-native products, rapid prototyping, full-stack product development, automation",
+      },
+    ],
+    knowsLanguage: ["en"],
+    seeks: "In-person or hybrid software engineering and founding-engineer roles in New York City",
     knowsAbout: [
       "Software Engineering",
       "Full-Stack Development",
@@ -112,6 +130,8 @@ function JsonLd() {
       "Model Context Protocol",
       "AI Agents",
       "Agentic AI",
+      "AI-Native Developer Tools",
+      "LLM Applications",
       "TypeScript",
       "JavaScript",
       "Node.js",
@@ -123,14 +143,51 @@ function JsonLd() {
       "Startups",
       "DJing",
       "Electronic Dance Music",
+      "Powerlifting",
     ],
   };
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Chiggy AI",
+    url: "https://chiggy.ai",
+    founder: {
+      "@type": "Person",
+      name: "Chirag Chadha",
+      url: "https://chiggy.ai",
+    },
+    description:
+      "Chiggy AI is Chirag Chadha's AI-forward software and design studio for full-stack products, automation, and agentic tooling.",
+  };
+  const chiggyOsSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "chiggyOS",
+    applicationCategory: "ProductivityApplication",
+    operatingSystem: "Web, macOS, iOS",
+    url: "https://chiggy.ai/work/chiggyos",
+    author: {
+      "@type": "Person",
+      name: "Chirag Chadha",
+      url: "https://chiggy.ai",
+    },
+    description:
+      "chiggyOS is Chirag Chadha's personal agent operating system built on Obsidian, plain-text memory, Claude Code, cron, Telegram, and human-in-the-loop workflows.",
+    keywords:
+      "AI agents, personal knowledge management, Obsidian, agent workflows, second brain, MCP, AI-native tooling",
+  };
+  const schemas = [personSchema, organizationSchema, chiggyOsSchema];
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-    />
+    <>
+      {schemas.map((schema, index) => (
+        <script
+          key={`${schema["@type"]}-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+    </>
   );
 }
 
