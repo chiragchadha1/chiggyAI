@@ -1,4 +1,5 @@
 import { ArrowRight } from "@/components/icons";
+import { MetricValue } from "@/components/metric-value";
 import type { CaseStudyMeta } from "@/content/work/types";
 
 /**
@@ -34,7 +35,10 @@ export function CaseStudyLink({ meta }: { meta: CaseStudyMeta }) {
       <div className="cs-row-aside">
         {headline && (
           <span className="cs-row-metric">
-            <strong>{headline.value}</strong> {headline.label}
+            <strong>
+              <MetricValue value={headline.value} />
+            </strong>{" "}
+            {headline.label}
           </span>
         )}
         <span className="cs-row-cue">

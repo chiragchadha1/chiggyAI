@@ -3,6 +3,7 @@ import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import { CommandMenu } from "@/components/command-menu";
 import { CommandLauncher } from "@/components/command-launcher";
+import { ConsoleSignature } from "@/components/console-signature";
 
 const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
@@ -205,6 +206,7 @@ export default function RootLayout({
         {children}
         <CommandLauncher />
         <CommandMenu />
+        <ConsoleSignature />
       </body>
     </html>
   );
