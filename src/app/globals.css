@@ -42,6 +42,66 @@
 
 html { scroll-behavior: smooth; }
 
+/* Theme toggle crossfade (same-document view transition) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
+/* Skip link: visually hidden until keyboard-focused */
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 400;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ── 404 ── */
+.nf-block {
+  max-width: 480px;
+}
+.nf-prompt {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.nf-arrow {
+  color: #22c55e;
+}
+.nf-tilde {
+  color: var(--text-muted);
+}
+.nf-error {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.nf-title {
+  margin-top: 28px;
+  font-size: clamp(56px, 10vw, 88px);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text);
+}
+.nf-body {
+  margin-top: 18px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -1584,19 +1644,90 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 0;
 }
 
-/* ── Terminal ── */
+/* ── Terminal (popup dialog) ── */
+.terminal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 16px 16px;
+  animation: cmdk-overlay-in 0.18s ease;
+}
 .terminal {
-  margin-top: 30px;
+  width: min(94vw, 680px);
   border-radius: 12px;
   background: #1d1b18;
-  border: 1px solid rgba(40, 30, 15, 0.25);
+  border: 1px solid rgba(250, 249, 246, 0.1);
   font-family: var(--font-mono);
   font-size: 12.5px;
   line-height: 1.75;
   color: rgba(250, 249, 246, 0.88);
   overflow: hidden;
   cursor: text;
-  box-shadow: 0 1px 2px rgba(27, 26, 23, 0.08), 0 8px 28px rgba(27, 26, 23, 0.1);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+  animation: cmdk-panel-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.terminal-dot-close {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.terminal-dot-close:hover {
+  background: #f87171;
+}
+
+/* Inline launcher row that opens the popup */
+.terminal-launcher {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  margin-top: 30px;
+  padding: 11px 16px;
+  border: 1px solid rgba(250, 249, 246, 0.08);
+  border-radius: 10px;
+  background: #1d1b18;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: rgba(250, 249, 246, 0.55);
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s, color 0.2s;
+}
+.terminal-launcher:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 26px rgba(27, 26, 23, 0.18);
+  color: rgba(250, 249, 246, 0.8);
+}
+.terminal-launcher .term-prompt-path {
+  color: rgba(250, 249, 246, 0.45);
+}
+.terminal-launcher-cursor {
+  width: 7px;
+  height: 15px;
+  margin-left: 2px;
+  background: #22c55e;
+  animation: cursor-blink 1.1s steps(1) infinite;
+}
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .terminal-launcher-cursor {
+    animation: none;
+  }
+  .terminal-overlay,
+  .terminal {
+    animation: none;
+  }
 }
 .terminal-bar {
   display: flex;
@@ -1691,8 +1822,11 @@ a { color: inherit; text-decoration: none; }
   outline: none;
 }
 @media (max-width: 640px) {
+  .terminal-overlay {
+    padding: 8vh 10px 10px;
+  }
   .terminal-body {
-    max-height: 280px;
+    max-height: 60vh;
   }
   .terminal {
     font-size: 13.5px;

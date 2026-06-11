@@ -10,7 +10,7 @@ import { CaseStudyLink } from "@/components/case-study-link";
 import { LocalTime } from "@/components/local-time";
 import { RailNav } from "@/components/rail-nav";
 import { Reveal } from "@/components/reveal";
-import { Terminal } from "@/components/terminal";
+import { TerminalLauncher } from "@/components/terminal";
 import { XIcon, GithubIcon, LinkedInIcon, SpotifyIcon, ArrowUpRight } from "@/components/icons";
 
 const profilePageSchema = {
@@ -24,15 +24,8 @@ const profilePageSchema = {
 };
 
 export default function Home() {
-  const terminalItems = [...experience(), ...projects()].map(({ meta }) => ({
-    slug: meta.slug,
-    title: meta.title,
-    kind: meta.kind,
-    tagline: meta.tagline,
-  }));
-
   return (
-    <main className="home">
+    <main className="home" id="main-content">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
@@ -154,7 +147,7 @@ export default function Home() {
             </div>
 
             <Reveal>
-              <Terminal items={terminalItems} />
+              <TerminalLauncher />
             </Reveal>
           </section>
 

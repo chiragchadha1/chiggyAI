@@ -28,11 +28,14 @@ const COMMANDS = [
 ] as const;
 
 /**
- * A small working shell. I build CLI tooling for a living, so the homepage
- * gets a real one: command history, tab completion, and a few easter eggs.
- * Everything is client-side; the work list comes from the real content layer.
+ * A small working shell, opened as a popup from the launcher, the hint bar,
+ * the command palette, or Ctrl+` (VS Code muscle memory). I build CLI tooling
+ * for a living, so the site gets a real one: command history, tab completion,
+ * and a few easter eggs. The work list comes from the real content layer.
+ * Session state survives close/reopen because the component stays mounted.
  */
-export function Terminal({ items }: { items: TerminalWorkItem[] }) {
+export function TerminalDialog({ items }: { items: TerminalWorkItem[] }) {
+  const [open, setOpen] = useState(false);
   const [lines, setLines] = useState<Line[]>([]);
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<string[]>([]);
@@ -40,6 +43,36 @@ export function Terminal({ items }: { items: TerminalWorkItem[] }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
   const nextId = useRef(0);
+
+  // global openers: custom event + Ctrl/Cmd+backtick
+  useEffect(() => {
+    const onOpen = () => setOpen(true);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "`" && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        setOpen((o) => !o);
+      } else if (e.key === "Escape") {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("open-terminal", onOpen);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("open-terminal", onOpen);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+  // focus the prompt and lock page scroll while open
+  useEffect(() => {
+    if (!open) return;
+    const id = requestAnimationFrame(() => inputRef.current?.focus());
+    document.body.style.overflow = "hidden";
+    return () => {
+      cancelAnimationFrame(id);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   const push = useCallback((kind: Line["kind"], node: React.ReactNode) => {
     setLines((prev) => [...prev, { id: nextId.current++, kind, node }]);
@@ -189,7 +222,7 @@ export function Terminal({ items }: { items: TerminalWorkItem[] }) {
         case "q":
         case ":q":
           push("out", <>you can check out any time you like…</>);
-          inputRef.current?.blur();
+          window.setTimeout(() => setOpen(false), 600);
           break;
         default:
           push(
@@ -234,55 +267,85 @@ export function Terminal({ items }: { items: TerminalWorkItem[] }) {
     }
   }
 
+  if (!open) return null;
+
   return (
-    <div
-      className="terminal"
-      onClick={() => inputRef.current?.focus()}
-      aria-label="Interactive terminal. Type help for available commands."
-    >
-      <div className="terminal-bar">
-        <span className="terminal-dot" />
-        <span className="terminal-dot" />
-        <span className="terminal-dot" />
-        <span className="terminal-bar-title">guest@chiggy.ai · zsh</span>
-      </div>
-      <div ref={bodyRef} className="terminal-body">
-        <div className="term-out term-welcome">
-          chiggyOS shell. type <span className="term-key-inline">help</span> to look around.
-        </div>
-        <div role="log" aria-live="polite">
-          {lines.map((line) =>
-            line.kind === "cmd" ? (
-              <div key={line.id} className="term-cmd">
-                <span className="term-prompt">➜</span>
-                <span className="term-prompt-path">~</span>
-                {line.node}
-              </div>
-            ) : (
-              <div key={line.id} className="term-out">
-                {line.node}
-              </div>
-            )
-          )}
-        </div>
-        <div className="term-cmd term-input-row">
-          <span className="term-prompt">➜</span>
-          <span className="term-prompt-path">~</span>
-          <input
-            ref={inputRef}
-            className="term-input"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={onKeyDown}
-            spellCheck={false}
-            autoCapitalize="none"
-            autoComplete="off"
-            autoCorrect="off"
-            aria-label="Terminal command input"
-            enterKeyHint="send"
+    <div className="terminal-overlay" onClick={() => setOpen(false)}>
+      <div
+        className="terminal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Interactive terminal. Type help for available commands."
+        onClick={(e) => {
+          e.stopPropagation();
+          inputRef.current?.focus();
+        }}
+      >
+        <div className="terminal-bar">
+          <button
+            type="button"
+            className="terminal-dot terminal-dot-close"
+            aria-label="Close terminal"
+            onClick={() => setOpen(false)}
           />
+          <span className="terminal-dot" />
+          <span className="terminal-dot" />
+          <span className="terminal-bar-title">guest@chiggy.ai · zsh</span>
+        </div>
+        <div ref={bodyRef} className="terminal-body">
+          <div className="term-out term-welcome">
+            chiggyOS shell. type <span className="term-key-inline">help</span> to look around.
+          </div>
+          <div role="log" aria-live="polite">
+            {lines.map((line) =>
+              line.kind === "cmd" ? (
+                <div key={line.id} className="term-cmd">
+                  <span className="term-prompt">➜</span>
+                  <span className="term-prompt-path">~</span>
+                  {line.node}
+                </div>
+              ) : (
+                <div key={line.id} className="term-out">
+                  {line.node}
+                </div>
+              )
+            )}
+          </div>
+          <div className="term-cmd term-input-row">
+            <span className="term-prompt">➜</span>
+            <span className="term-prompt-path">~</span>
+            <input
+              ref={inputRef}
+              className="term-input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={onKeyDown}
+              spellCheck={false}
+              autoCapitalize="none"
+              autoComplete="off"
+              autoCorrect="off"
+              aria-label="Terminal command input"
+              enterKeyHint="send"
+            />
+          </div>
         </div>
       </div>
     </div>
+  );
+}
+
+/** Slim prompt-styled row in the About section that opens the terminal popup. */
+export function TerminalLauncher() {
+  return (
+    <button
+      type="button"
+      className="terminal-launcher"
+      onClick={() => window.dispatchEvent(new Event("open-terminal"))}
+    >
+      <span className="term-prompt">➜</span>
+      <span className="term-prompt-path">~</span>
+      <span className="terminal-launcher-text">open the terminal</span>
+      <span className="terminal-launcher-cursor" aria-hidden="true" />
+    </button>
   );
 }

@@ -10,7 +10,7 @@ export interface CommandItem {
   /** Internal path (hard nav, preserves view transition), external URL, or action. */
   href?: string;
   external?: boolean;
-  action?: "copy-email";
+  action?: "copy-email" | "open-terminal";
   keywords?: string;
 }
 
@@ -53,6 +53,11 @@ export function CommandPalette({
           },
           () => {}
         );
+        return;
+      }
+      if (item.action === "open-terminal") {
+        close();
+        window.dispatchEvent(new Event("open-terminal"));
         return;
       }
       if (!item.href) return;

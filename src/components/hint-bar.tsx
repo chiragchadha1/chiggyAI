@@ -9,10 +9,19 @@ const isMacServerSnapshot = () => true;
 
 interface Hint {
   label: string;
+  /** Rendered with the platform modifier prefix (⌘ / Ctrl). */
   kbd?: string;
+  /** Rendered as-is (mac) or with Ctrl spelled out. */
+  kbdRaw?: string;
   mono?: boolean;
   action: "palette" | "terminal";
 }
+
+const HINTS: Hint[] = [
+  { label: "Navigate", kbd: "K", action: "palette" },
+  { label: "Try the terminal", kbdRaw: "⌃ `", action: "terminal" },
+  { label: "sudo hire-me", mono: true, action: "terminal" },
+];
 
 function SunIcon() {
   return (
@@ -37,21 +46,14 @@ function MoonIcon() {
  */
 export function HintBar() {
   const mac = useSyncExternalStore(noopSubscribe, isMacSnapshot, isMacServerSnapshot);
-  const [hints, setHints] = useState<Hint[]>([{ label: "Navigate", kbd: "K", action: "palette" }]);
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark" | null>(null);
 
-  // discover page surfaces + current theme after mount (deferred a frame so the
+  // read the bootstrap-applied theme after mount (deferred a frame so the
   // effect body stays free of synchronous setState)
   useEffect(() => {
     const id = requestAnimationFrame(() => {
-      const found: Hint[] = [{ label: "Navigate", kbd: "K", action: "palette" }];
-      if (document.querySelector(".terminal")) {
-        found.push({ label: "Try the terminal", action: "terminal" });
-        found.push({ label: "sudo hire-me", mono: true, action: "terminal" });
-      }
-      setHints(found);
       setTheme(document.documentElement.dataset.theme === "dark" ? "dark" : "light");
     });
     return () => cancelAnimationFrame(id);
@@ -59,31 +61,39 @@ export function HintBar() {
 
   // rotate hints; respect reduced motion and hover
   useEffect(() => {
-    if (hints.length < 2 || paused) return;
+    if (paused) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = window.setInterval(() => setIdx((i) => (i + 1) % hints.length), 5000);
+    const t = window.setInterval(() => setIdx((i) => (i + 1) % HINTS.length), 5000);
     return () => window.clearInterval(t);
-  }, [hints, paused]);
+  }, [paused]);
 
-  const hint = hints[idx % hints.length];
+  const hint = HINTS[idx % HINTS.length];
 
   function runHint() {
-    if (hint.action === "terminal") {
-      const term = document.querySelector<HTMLElement>(".terminal");
-      const input = document.querySelector<HTMLInputElement>(".term-input");
-      term?.scrollIntoView({ block: "center", behavior: "smooth" });
-      window.setTimeout(() => input?.focus({ preventScroll: true }), 450);
-    } else {
-      window.dispatchEvent(new Event("open-command-palette"));
-    }
+    window.dispatchEvent(
+      new Event(hint.action === "terminal" ? "open-terminal" : "open-command-palette")
+    );
   }
 
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem("theme", next);
-    } catch {}
+    const apply = () => {
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch {}
+    };
+    // crossfade the whole page when the browser supports same-document view transitions
+    if (
+      "startViewTransition" in document &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      (
+        document as Document & { startViewTransition: (cb: () => void) => void }
+      ).startViewTransition(apply);
+    } else {
+      apply();
+    }
     setTheme(next);
   }
 
@@ -107,6 +117,9 @@ export function HintBar() {
           <kbd className="hint-kbd">
             {mac ? "⌘" : "Ctrl"} {hint.kbd}
           </kbd>
+        )}
+        {hint.kbdRaw && (
+          <kbd className="hint-kbd">{mac ? hint.kbdRaw : `Ctrl ${hint.kbdRaw.slice(2)}`}</kbd>
         )}
       </button>
       <button
