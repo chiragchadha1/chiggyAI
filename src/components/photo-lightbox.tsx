@@ -19,6 +19,10 @@ function GalleryItem({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      el.classList.add("gallery-item-visible");
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
