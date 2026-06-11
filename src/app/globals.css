@@ -1140,10 +1140,17 @@ a { color: inherit; text-decoration: none; }
   .reveal,
   .reveal .section-heading,
   .reveal .rows > a,
-  .reveal .gallery-wrap {
+  .reveal .gallery-wrap,
+  .cs-diagram .diagram-svg [data-anim],
+  .metric {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
+    transition: none !important;
+  }
+  .cs-diagram .diagram-svg [data-anim-line] {
+    stroke-dasharray: none !important;
+    stroke-dashoffset: 0 !important;
     transition: none !important;
   }
 }
@@ -1263,7 +1270,8 @@ a { color: inherit; text-decoration: none; }
     opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.metric-visible {
+.metric-visible,
+.metric-strip-in .metric {
   opacity: 1;
   transform: none;
 }
@@ -1454,6 +1462,47 @@ a { color: inherit; text-decoration: none; }
   display: block;
   width: 100%;
   height: auto;
+}
+/* Elements marked data-anim stagger in when the diagram scrolls into view */
+.cs-diagram .diagram-svg [data-anim] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.55s var(--ease-out),
+    transform 0.55s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.cs-diagram.reveal-in .diagram-svg [data-anim] {
+  opacity: 1;
+  transform: none;
+}
+/* Connector lines draw in via dash offset instead of rising */
+.cs-diagram .diagram-svg [data-anim-line] {
+  stroke-dasharray: var(--len, 200);
+  stroke-dashoffset: var(--len, 200);
+  transition: stroke-dashoffset 0.7s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.cs-diagram.reveal-in .diagram-svg [data-anim-line] {
+  stroke-dashoffset: 0;
+}
+
+/* ── Reading progress (case-study pages) ── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 90;
+  pointer-events: none;
+}
+.reading-progress-bar {
+  height: 100%;
+  background: var(--text);
+  opacity: 0.35;
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
 /* ── Callout ── */

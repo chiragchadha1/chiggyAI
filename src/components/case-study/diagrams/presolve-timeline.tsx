@@ -32,12 +32,14 @@ export function PresolveTimeline() {
         y2={lineY}
         stroke="var(--divider)"
         strokeWidth={2}
+        data-anim-line=""
+        style={{ ["--len" as string]: span, ["--i" as string]: 0 }}
       />
       {STEPS.map((s, i) => {
         const x = padX + i * step;
         const last = i === STEPS.length - 1;
         return (
-          <g key={s.t}>
+          <g key={s.t} data-anim="" style={{ ["--i" as string]: i + 1 }}>
             <circle
               cx={x}
               cy={lineY}

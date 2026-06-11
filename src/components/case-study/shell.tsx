@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/site-header";
 import { MetricStrip } from "@/components/metric-strip";
 import { RepoLinks } from "@/components/repo-links";
 import { PhotoGallery } from "@/components/photo-lightbox";
+import { ReadingProgress } from "@/components/reading-progress";
 import type { CaseStudyMeta } from "@/content/work/types";
 
 /**
@@ -19,9 +20,12 @@ export function CaseStudyShell({
 
   return (
     <main className="max-w-2xl mx-auto px-6 py-16 md:py-24 text-[15px] leading-relaxed">
+      <ReadingProgress />
       <SiteHeader compact />
 
       <header className="cs-header">
+        {/* The title row stays static: the h1 owns the cross-document view-transition
+            morph and must not animate opacity while it is being snapshotted. */}
         <div className="flex items-baseline gap-2.5 flex-wrap">
           <h1
             className="cs-title"
@@ -35,11 +39,13 @@ export function CaseStudyShell({
             </span>
           )}
         </div>
-        <p className="cs-tagline">{meta.tagline}</p>
-        {metaLine && <p className="cs-meta">{metaLine}</p>}
+        <p className="cs-tagline load-item" style={{ ["--i" as string]: 0 }}>{meta.tagline}</p>
+        {metaLine && <p className="cs-meta load-item" style={{ ["--i" as string]: 1 }}>{metaLine}</p>}
       </header>
 
-      <MetricStrip metrics={meta.metrics} />
+      <div className="load-item" style={{ ["--i" as string]: 2 }}>
+        <MetricStrip metrics={meta.metrics} />
+      </div>
 
       <article className="cs-body">{children}</article>
 

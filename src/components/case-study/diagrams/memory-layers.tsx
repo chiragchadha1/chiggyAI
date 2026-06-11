@@ -28,7 +28,7 @@ export function MemoryLayers() {
       {LAYERS.map((layer, i) => {
         const y = top + i * (rowH + gap);
         return (
-          <g key={layer.name}>
+          <g key={layer.name} data-anim="" style={{ ["--i" as string]: i }}>
             <rect
               x={1}
               y={y}
@@ -39,7 +39,6 @@ export function MemoryLayers() {
               stroke="var(--divider)"
               strokeWidth={1}
             />
-            <rect x={1} y={y} width={4} height={rowH} rx={2} fill="var(--text-muted)" />
             <text
               x={28}
               y={y + rowH / 2 - 2}
