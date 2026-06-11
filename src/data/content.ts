@@ -18,7 +18,13 @@ export interface RepoLink {
 }
 
 export type Status = "building" | "completed" | "active";
-export type VisualKey = "memory-layers" | "presolve-timeline";
+export type VisualKey =
+  | "memory-layers"
+  | "presolve-timeline"
+  | "agent-stack"
+  | "vault-mirror-persona"
+  | "atlas-loop"
+  | "craft-timeline";
 
 export interface Metric {
   value: string;
