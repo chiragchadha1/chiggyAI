@@ -41,13 +41,13 @@ export default function Home() {
               Software Engineer · Founder · NYC
             </p>
             <div className="load-item" style={{ ["--i" as string]: 2 }}>
-              <div className="availability">
+              <a className="availability" href="mailto:hi@chiggy.ai" title="Email me">
                 <span className="availability-main">
                   <span className="availability-dot" />
                   Open to new opportunities
                 </span>
                 <span className="availability-detail">in-person or hybrid in NYC</span>
-              </div>
+              </a>
             </div>
           </div>
 

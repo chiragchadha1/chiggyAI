@@ -215,24 +215,39 @@ a { color: inherit; text-decoration: none; }
   background: var(--hover-bg);
 }
 
-/* ── Availability badge ── */
+/* ── Availability badge: the one loud signal on the page ── */
 .availability {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3px;
+  gap: 4px;
   margin-top: 12px;
-  padding: 8px 14px 8px 11px;
+  padding: 10px 16px 10px 12px;
   border-radius: 14px;
-  font-size: 13px;
-  background: rgba(34, 197, 94, 0.06);
-  border: 1px solid rgba(34, 197, 94, 0.18);
-  color: var(--text-secondary);
+  font-size: 13.5px;
+  background: rgba(34, 197, 94, 0.09);
+  border: 1px solid rgba(34, 197, 94, 0.32);
+  color: var(--text);
+  transition: transform 0.2s var(--ease-out), border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.availability:hover {
+  transform: translateY(-1px);
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.5);
+  box-shadow: 0 4px 18px rgba(34, 197, 94, 0.14);
+}
+[data-theme="dark"] .availability {
+  background: rgba(34, 197, 94, 0.11);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+[data-theme="dark"] .availability:hover {
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(34, 197, 94, 0.6);
 }
 
 .availability-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #22c55e;
   flex-shrink: 0;
@@ -244,13 +259,14 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 8px;
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .availability-detail {
   /* dot width + gap, so the detail lines up under the main text */
-  padding-left: 15px;
-  font-size: 12px;
-  color: var(--text-muted);
+  padding-left: 16px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
 }
 
 @keyframes pulse-dot {
@@ -957,6 +973,9 @@ a { color: inherit; text-decoration: none; }
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: none;
+  /* bleed to the screen edge so chips scroll flush instead of clipping mid-air */
+  margin-inline: -24px;
+  padding-inline: 24px;
 }
 .mobile-jump-nav::-webkit-scrollbar {
   display: none;
@@ -999,17 +1018,21 @@ a { color: inherit; text-decoration: none; }
     margin-top: 18px;
   }
   .rail-bottom {
-    margin-top: 14px;
+    margin-top: 16px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
   }
   .rail-time {
     text-align: right;
   }
+  .rail-socials {
+    min-width: 0;
+  }
   .content {
-    padding-top: 30px;
+    padding-top: 38px;
   }
 }
 .rail-socials {
@@ -1032,6 +1055,8 @@ a { color: inherit; text-decoration: none; }
 .rail-time {
   font-size: 12px;
   color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Scroll-spy rail nav */
@@ -1155,8 +1180,8 @@ a { color: inherit; text-decoration: none; }
   }
 }
 .about-hero-portrait-img {
-  width: 136px;
-  height: 172px;
+  width: 172px;
+  height: 216px;
   object-fit: cover;
   border-radius: 16px;
   border: 1px solid var(--divider);
