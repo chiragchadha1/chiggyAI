@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { CommandMenu } from "@/components/command-menu";
 import { HintBar } from "@/components/hint-bar";
 import { ConsoleSignature } from "@/components/console-signature";
+import { TerminalDialog } from "@/components/terminal";
+import { projects, experience } from "@/content/work";
 
 const hanken = Hanken_Grotesk({
   variable: "--font-hanken",
@@ -232,10 +235,22 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className="min-h-full font-[family-name:var(--font-hanken)]">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         {children}
         <HintBar />
         <CommandMenu />
+        <TerminalDialog
+          items={[...experience(), ...projects()].map(({ meta }) => ({
+            slug: meta.slug,
+            title: meta.title,
+            kind: meta.kind,
+            tagline: meta.tagline,
+          }))}
+        />
         <ConsoleSignature />
+        <Analytics />
       </body>
     </html>
   );

@@ -19,7 +19,7 @@ export function CaseStudyShell({
   const metaLine = [meta.role ?? meta.org, meta.when].filter(Boolean).join(" · ");
 
   return (
-    <main className="cs-page mx-auto px-6 py-16 md:py-24 text-[15px] leading-relaxed">
+    <main className="cs-page mx-auto px-6 py-16 md:py-24 text-[15px] leading-relaxed" id="main-content">
       <ReadingProgress />
       <SiteHeader compact />
 
