@@ -40,6 +40,13 @@ export default function Home() {
             <RailNav />
           </div>
 
+          <nav className="mobile-jump-nav load-item" aria-label="Sections" style={{ ["--i" as string]: 3 }}>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#photos">Photos</a>
+          </nav>
+
           <div className="rail-bottom load-item" style={{ ["--i" as string]: 4 }}>
             <div className="rail-socials">
               <a href="https://x.com/chiggyio" target="_blank" rel="noreferrer" className="social-icon" title="X" aria-label="X"><XIcon /></a>
@@ -63,7 +70,7 @@ export default function Home() {
                   <span className="highlight">AI-native products</span>, and I ship them fast.
                 </h2>
                 <p className="hero-intro load-item" style={{ ["--i" as string]: 2 }}>
-                  Software engineer, founder, <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>, and <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage> in New York. I&apos;ve been designing and building things since I was 15.
+                  Software engineer, founder, <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>, and <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage>{" "}in New York. I&apos;ve been designing and building things since I was 15.
                 </p>
                 <div className="cta-row load-item" style={{ ["--i" as string]: 3 }}>
                   <CopyEmail email="hi@chiggy.ai" />
@@ -93,7 +100,11 @@ export default function Home() {
               </p>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F9E0;</span>
-                <span>Creating <span className="highlight">chiggyOS</span>, an AI-native second brain on Obsidian</span>
+                <span>Creating <span className="highlight">chiggyOS</span>, a personal agent operating system where my notes, projects, and workflows become durable context</span>
+              </p>
+              <p className="bio-line">
+                <span className="bio-emoji">&#x1F3CB;&#xFE0F;</span>
+                <span>Competed at my first <span className="highlight">USAPL powerlifting meet</span> in May 2026</span>
               </p>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F3B6;</span>
