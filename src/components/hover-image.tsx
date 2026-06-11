@@ -1,6 +1,11 @@
 "use client";
 
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback, useEffect, useSyncExternalStore } from "react";
+
+const noopSubscribe = () => () => {};
+const getTouchSnapshot = () =>
+  "ontouchstart" in window || navigator.maxTouchPoints > 0;
+const getTouchServerSnapshot = () => false;
 
 export function HoverImage({
   children,
@@ -13,11 +18,13 @@ export function HoverImage({
 }) {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const [visible, setVisible] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
-
-  useEffect(() => {
-    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
-  }, []);
+  // Client-only touch detection without setState-in-effect: false on the server,
+  // resolves to the real value after hydration.
+  const isTouch = useSyncExternalStore(
+    noopSubscribe,
+    getTouchSnapshot,
+    getTouchServerSnapshot
+  );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {

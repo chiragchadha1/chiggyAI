@@ -1,0 +1,72 @@
+export const meta = {
+  slug: "chiggyos",
+  title: "chiggyOS",
+  kind: "project",
+  role: "Personal infrastructure",
+  when: "2026 -",
+  status: "building",
+  order: 1,
+  tagline:
+    "An AI-native operating system for my life. A second brain that actually remembers what I told it last week.",
+  metrics: [
+    { value: "5", label: "layers of memory" },
+    { value: "daily", label: "journal + transcript ingest" },
+    { value: "live", label: "demoed in real interviews" },
+  ],
+  stack: ["Obsidian", "Claude Code", "Markdown", "Cron"],
+  visual: "memory-layers",
+  links: [],
+};
+
+## The problem
+
+AI models change constantly, but my context should not have to. I wanted a foundational
+infrastructure layer for my life that I own, where I can plug and play whatever model I use
+and never lose what I have already taught it.
+
+## What I built
+
+chiggyOS runs on Obsidian and Claude Code, modeling human memory across five layers:
+procedural rules, semantic knowledge, episodic journals, a working-memory crash buffer, and
+an identity layer.
+
+<Diagram name="memory-layers" />
+
+Raw, messy inputs (voice-to-text dumps, web clips, meeting transcripts, daily notes) are
+treated as immutable sources. A nightly "absorb" pass reads anything new, asks what it
+means and how it connects, and writes the distilled signal into a flat, link-navigated wiki.
+Absorbed sources are relocated, never edited, so the history stays intact and the inbox
+stays clean.
+
+<Code lang="ts" file="absorb.ts">{`// nightly: read new raw sources, synthesize into the wiki
+for (const source of await newSourcesSince(lastRun)) {
+  const meaning = await interpret(source); // what does this mean?
+  await wiki.integrate(meaning);           // connect it to what I know
+}
+await memory.checkpoint();                  // crash-buffer for the next session`}</Code>
+
+The whole system is operated like a CLI through a custom `/wiki` skill (`absorb`, `query`,
+`cleanup`, `breakdown`, `brief`, `digest`, `resume`), and versioned with a deliberate
+push-only git model so it never fights live cross-device sync.
+
+## The autonomous agent
+
+An autonomous chief-of-staff agent (codename Atlas) runs the system on a remote server. It
+acts proactively on top of the same memory: ingesting journals, managing email, tasks, and
+calendar, and reporting through a Telegram interface. Three cron jobs drive it (a nightly
+ingest plus morning and weekend briefings), and its persona lives in a single
+source-of-truth file so its behavior is versioned and portable across models.
+
+<Diagram name="atlas-loop" />
+
+<Callout label="The thesis">
+AI models change constantly, so the durable value is the foundational layer you own. Keep
+the memory in plain text, treat the model as a swappable component, and you never have to
+rebuild your context again.
+</Callout>
+
+## Impact
+
+It is the system I use every day, and it became a live conversation piece in interviews. I
+have installed and debugged the agent on screen mid-interview, with it pulling my own
+context out of the vault in real time. No static demo could replicate that.

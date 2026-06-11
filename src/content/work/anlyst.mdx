@@ -1,0 +1,46 @@
+export const meta = {
+  slug: "anlyst",
+  title: "Anlyst",
+  kind: "experience",
+  org: "Anlyst",
+  role: "Co-founder & CTO",
+  when: "2024 - 2025",
+  status: "completed",
+  order: 2,
+  tagline:
+    "Consumer AI fighting decision fatigue with stateful agents that actually remember you.",
+  metrics: [
+    { value: "200+", label: "waitlist sign-ups" },
+    { value: "3+", label: "VC conversations" },
+    { value: "4", label: "health data integrations" },
+  ],
+  stack: ["TypeScript", "Stateful agents", "Health APIs"],
+  links: [],
+};
+
+## The problem
+
+Most AI assistants forget you the moment a session ends. Anlyst was a bet that decision
+fatigue gets solved by agents with persistent, personal context, not by another stateless
+chatbot.
+
+## What I built
+
+As CTO of a two-person founding team, I architected a three-layer system around a simple
+formula: collect, understand, act. The **Vault** securely aggregates a user's data across
+apps; the **Mirror** turns it into personal context through a correlation and
+activity-recognition engine; the **Persona** is the agent that acts proactively on the
+user's behalf.
+
+<Diagram name="vault-mirror-persona" />
+
+The MVP pulled real signal from Whoop, Apple Health, Google Calendar, and MyFitnessPal so
+the agent reasoned from your actual life, not generic advice. Data security, transparency,
+and user control were first-class product principles.
+
+## Impact
+
+The launch drove 200+ waitlist sign-ups and early VC conversations before I moved to
+full-time engineering at HubSpot. The memory thesis outlived the company. It became the seed
+for [chiggyOS](/work/chiggyos), where I rebuilt the same idea as personal infrastructure I
+own.

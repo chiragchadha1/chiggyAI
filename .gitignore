@@ -42,3 +42,7 @@ LINKEDIN.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# external agent configs
+.agents/
+.codex/
