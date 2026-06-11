@@ -10,9 +10,17 @@ import { CaseStudyLink } from "@/components/case-study-link";
 import { LocalTime } from "@/components/local-time";
 import { RailNav } from "@/components/rail-nav";
 import { Reveal } from "@/components/reveal";
+import { Terminal } from "@/components/terminal";
 import { XIcon, GithubIcon, LinkedInIcon, SpotifyIcon, ArrowUpRight } from "@/components/icons";
 
 export default function Home() {
+  const terminalItems = [...experience(), ...projects()].map(({ meta }) => ({
+    slug: meta.slug,
+    title: meta.title,
+    kind: meta.kind,
+    tagline: meta.tagline,
+  }));
+
   return (
     <main className="home">
       <div className="home-grid">
@@ -130,6 +138,10 @@ export default function Home() {
                 <span>Always hunting for the best <HoverImage src="/images/nyc-burger-egg.webp" alt="NYC restaurant">restaurants</HoverImage> in New York. Right now it&apos;s <HoverImage src="/images/ci-siamo-birthday.webp" alt="Birthday dinner at Ci Siamo">Ci Siamo</HoverImage>. <span className="text-[var(--text-muted)]">(<a href="https://beliapp.com/app/chirag" target="_blank" rel="noreferrer" className="inline-link text-[var(--text-muted)]">@chirag on Beli</a>)</span></span>
               </p>
             </div>
+
+            <Reveal>
+              <Terminal items={terminalItems} />
+            </Reveal>
           </section>
 
           {/* Experience */}

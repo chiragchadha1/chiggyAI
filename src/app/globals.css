@@ -1534,6 +1534,128 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 0;
 }
 
+/* ── Terminal ── */
+.terminal {
+  margin-top: 30px;
+  border-radius: 12px;
+  background: #1d1b18;
+  border: 1px solid rgba(40, 30, 15, 0.25);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: rgba(250, 249, 246, 0.88);
+  overflow: hidden;
+  cursor: text;
+  box-shadow: 0 1px 2px rgba(27, 26, 23, 0.08), 0 8px 28px rgba(27, 26, 23, 0.1);
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 14px;
+  border-bottom: 1px solid rgba(250, 249, 246, 0.08);
+}
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(250, 249, 246, 0.14);
+}
+.terminal-bar-title {
+  margin-left: auto;
+  font-size: 11px;
+  color: rgba(250, 249, 246, 0.35);
+  letter-spacing: 0.02em;
+}
+.terminal-body {
+  padding: 14px 16px 16px;
+  max-height: 320px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.term-cmd {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.term-prompt {
+  color: #22c55e;
+  flex-shrink: 0;
+}
+.term-prompt-path {
+  color: rgba(250, 249, 246, 0.45);
+  flex-shrink: 0;
+}
+.term-out {
+  display: block;
+  padding: 2px 0 8px;
+  color: rgba(250, 249, 246, 0.72);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.term-out a {
+  color: rgba(250, 249, 246, 0.92);
+  text-decoration: underline;
+  text-decoration-color: rgba(250, 249, 246, 0.3);
+  text-underline-offset: 3px;
+}
+.term-out a:hover {
+  text-decoration-color: rgba(250, 249, 246, 0.8);
+}
+.term-welcome {
+  color: rgba(250, 249, 246, 0.45);
+}
+.term-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+.term-key {
+  flex-shrink: 0;
+  width: 96px;
+  color: rgba(250, 249, 246, 0.92);
+}
+.term-key-inline {
+  color: rgba(250, 249, 246, 0.92);
+}
+.term-dim {
+  color: rgba(250, 249, 246, 0.4);
+}
+.term-input-row {
+  margin-top: 2px;
+}
+.term-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  caret-color: #22c55e;
+  padding: 0;
+}
+.term-input:focus-visible {
+  outline: none;
+}
+@media (max-width: 640px) {
+  .terminal-body {
+    max-height: 280px;
+  }
+  .terminal {
+    font-size: 13.5px;
+  }
+  /* 16px stops iOS from zooming the page when the input focuses */
+  .term-input {
+    font-size: 16px;
+  }
+  .term-key {
+    width: 84px;
+  }
+}
+
 /* ── Local time footer ── */
 .local-time {
   display: inline-flex;
