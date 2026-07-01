@@ -8,13 +8,14 @@ export const meta = {
   status: "completed",
   order: 1,
   tagline:
-    "Owned the developer tools that 4,000+ developers rely on every week. Built the MCP server, redesigned authentication from scratch, and shaped how the platform thinks about AI agents.",
+    "Built and maintained the developer tools that 4,000+ developers rely on every week, including the MCP server, a full authentication redesign, and the team's first agent-facing infrastructure.",
   metrics: [
     { value: "+425%", label: "quarterly active developers", sub: "72% still active after 4 weeks" },
     { value: "4,000+", label: "developers using the tools weekly" },
     { value: "70k", label: "weekly active AI connector users", sub: "188% growth across the platform" },
   ],
   stack: ["TypeScript", "Node", "React Ink", "MCP", "Claude Code"],
+  logo: "/images/logos/hubspot.svg",
   links: [
     {
       name: "hubspot-cli",
@@ -33,15 +34,14 @@ export const meta = {
 
 HubSpot's developer platform serves over 100,000 active developer accounts. Everything
 from building apps to deploying projects runs through a CLI and a set of shared libraries.
-The platform's direction was clear: make HubSpot accessible from every surface where
-developers work, and treat AI agents as first-class users alongside humans.
+The platform's direction was to make HubSpot accessible from every surface where
+developers work, and treat AI agents as real users alongside humans.
 
 When I joined the Developer Experience team, the tooling wasn't ready for that. The
 authentication system used an insecure config format. Logging was inconsistent across the
 entire codebase. About a third of new developers failed silently during onboarding. And
 none of the major AI coding agents (Claude Code, Cursor, Codex, Gemini, Windsurf) could
-interact with HubSpot at all. There was a real gap between where the platform was headed
-and where the developer tools actually were.
+interact with HubSpot at all. The developer tools weren't there yet.
 
 ## MCP server and agent infrastructure
 
@@ -55,7 +55,7 @@ waiting for responses that never came.
 
 <Diagram name="agent-stack" />
 
-I also designed a promotion system to drive MCP adoption across the CLI. The system detects
+I also designed a promotion system to get developers onto the MCP server from the CLI. The system detects
 whether a developer already has the MCP server configured (by checking actual config files
 rather than storing flags), respects per-surface cooldowns so developers aren't nagged, and
 tracks attribution to measure which surfaces actually convert to installs. I shipped the
@@ -63,7 +63,7 @@ whole thing, from architecture to 8+ wired surfaces, in about a week.
 
 ## Authentication overhaul
 
-I led the largest architectural project on the CLI: a full redesign of how developers
+I led the largest architectural project on the CLI, a full redesign of how developers
 authenticate and manage accounts.
 
 The old system stored credentials in a flat YAML file with no directory scoping. If you
@@ -91,25 +91,25 @@ const selected = candidates.find(c => c.category === 'recommended');`}</Code>
 
 ## CLI infrastructure
 
-I shipped a lot of foundational work that made the CLI better for both humans and agents:
+I shipped a lot of foundational work that made the CLI better for both humans and agents.
 
-- **Logging system:** Designed a unified logging abstraction and migrated it across the
+- **Logging system.** Designed a unified logging abstraction and migrated it across the
   entire codebase (~160 files, ~5,000 lines). This was my second month on the job and it
   required understanding how every command in the CLI worked.
-- **React Ink UI modernization:** Rebuilt the CLI's terminal output layer with React Ink,
+- **React Ink UI modernization.** Rebuilt the CLI's terminal output layer with React Ink,
   including reusable Table and List components, a new Box layout system, and interactive
   project creation flows. Shipped as part of CLI v8.
-- **Release management commands:** Built a new command suite for managing project releases,
-  designed for two distinct flows: marketplace releases (pushing updates to all users) and
+- **Release management commands.** Built a new command suite for managing project releases,
+  designed for two distinct flows, marketplace releases (pushing updates to all users) and
   local dev previews. I thought deeply about the UX here, mapping out how developers would
   actually use these commands across different stages of their workflow.
-- **App installation from the CLI:** Closed a gap where developers had to leave the terminal
+- **App installation from the CLI.** Closed a gap where developers had to leave the terminal
   and open a browser to install their own app. I coordinated cross-team with the backend
   platform team to get a new API endpoint built, then wired it into a new CLI command.
-- **State infrastructure:** Designed a type-safe state system for persisting CLI and MCP
+- **State infrastructure.** Designed a type-safe state system for persisting CLI and MCP
   data across sessions. Handles edge cases (corrupted files, missing keys, backwards
   compatibility) automatically.
-- **VS Code extension:** Managed multiple releases, built the release automation script,
+- **VS Code extension.** Managed multiple releases, built the release automation script,
   and published to the [Open VSX Registry](https://open-vsx.org/) so the extension works in
   any VS Code-compatible editor (Cursor, Windsurf, and others).
 
@@ -118,18 +118,17 @@ I shipped a lot of foundational work that made the CLI better for both humans an
 Toward the end of my time I led a new direction for the team: making the CLI work reliably
 when the user is an AI agent, not a human.
 
-The core question I framed: how does the CLI need to evolve when the user isn't always a
-person? Agents can't answer interactive prompts. They need structured output they can parse.
-They need deterministic account selection instead of ambient defaults. And they need clear
-error signals instead of vague log messages.
+How does the CLI need to evolve when the user isn't always a person? Agents can't answer
+interactive prompts. They need structured output they can parse, deterministic account
+selection instead of ambient defaults, and clear error signals instead of vague log messages.
 
 I scoped the problem, broke it into three workstreams (CLI contracts, MCP tool quality,
 and agent-facing documentation), and built the foundational pieces: a shared utility for
 deterministic account resolution and a repo configuration that lets multiple AI tools
 (Claude Code, Codex, and others) work with the codebase interchangeably.
 
-The goal, and where HubSpot's platform is headed: agents are first-class users. Anything a
-developer can do in the UI, an agent should be able to do through the CLI and MCP.
+The goal is that agents are real users of the platform. Anything a developer can do in the
+UI, an agent should be able to do through the CLI and MCP.
 
 ## On-call and cross-team work
 
@@ -142,8 +141,8 @@ the tone and context for each response automatically.
 
 The MCP server grew the quarterly active developer community by 425%, from 346 to over
 1,800 developers, with 72% still active after four weeks. Across the broader platform, AI
-connector usage grew 188% to 70,000 weekly active users. The authentication redesign
-dramatically improved the first-run experience for new developers. Tooling I worked on
+connector usage grew 188% to 70,000 weekly active users. The authentication redesign fixed silent failures during onboarding and gave developers
+directory-scoped account targeting for the first time. Tooling I worked on
 ships to more than 4,000 developers every week across the CLI, shared libraries, and the
 VS Code extension. In under a year I led 9 projects, cut 20+ releases, and shipped across
 8 repositories.

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowRight } from "@/components/icons";
 import { MetricValue } from "@/components/metric-value";
 import type { CaseStudyMeta } from "@/content/work/types";
@@ -13,9 +14,15 @@ export function CaseStudyLink({ meta }: { meta: CaseStudyMeta }) {
   const inner = (
     <>
       <div className="cs-row-main">
-        <span className="cs-row-mono" aria-hidden="true">
-          {meta.title.charAt(0)}
-        </span>
+        {meta.logo ? (
+          <span className="cs-row-logo" aria-hidden="true">
+            <Image src={meta.logo} alt="" width={40} height={40} />
+          </span>
+        ) : (
+          <span className="cs-row-mono" aria-hidden="true">
+            {meta.title.charAt(0)}
+          </span>
+        )}
         <div className="cs-row-text">
           <div className="cs-row-head">
             <h3

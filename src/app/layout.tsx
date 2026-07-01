@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     "New York",
     "NYC",
     "HubSpot",
-    "Chiggy AI",
+    "chiggyAI",
   ],
   openGraph: {
     title: "Chirag Chadha | Founding Engineer, Builder, DJ",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Chirag Chadha - Software Engineer, Founder, DJ in New York",
+        alt: "Chirag Chadha - Founding Engineer, Builder, DJ in New York",
       },
     ],
   },
@@ -171,7 +171,7 @@ function JsonLd() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Chiggy AI",
+    name: "chiggyAI",
     url: "https://chiggy.ai",
     founder: {
       "@type": "Person",
@@ -179,7 +179,7 @@ function JsonLd() {
       url: "https://chiggy.ai",
     },
     description:
-      "Chiggy AI is Chirag Chadha's software and design studio. Full-stack products, automation, and developer tooling.",
+      "chiggyAI is Chirag Chadha's software and design studio. Full-stack products, automation, and developer tooling.",
   };
   const chiggyOsSchema = {
     "@context": "https://schema.org",

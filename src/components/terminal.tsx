@@ -115,8 +115,8 @@ export function TerminalDialog({ items }: { items: TerminalWorkItem[] }) {
         case "whoami":
           push(
             "out",
-            <>Chirag Chadha. Founding engineer, previously at HubSpot (Developer Experience).
-            Based in NYC. I design and build developer tools, AI agents, and side projects.</>
+            <>Chirag Chadha. Founding engineer at Spur, previously at HubSpot (Developer Experience).
+            Based in NYC. I design and build developer tools, AI agents, and whatever I can&apos;t stop thinking about.</>
           );
           break;
         case "work":
@@ -166,7 +166,7 @@ export function TerminalDialog({ items }: { items: TerminalWorkItem[] }) {
           push(
             "out",
             <>
-              <span className="term-row"><span className="term-dim">→</span>starting a new role as a founding engineer</span>
+              <span className="term-row"><span className="term-dim">→</span>founding engineer at Spur, building autonomous testing agents</span>
               <span className="term-row"><span className="term-dim">→</span>building chiggyOS, my personal agent operating system</span>
               <span className="term-row"><span className="term-dim">→</span>training for my next USAPL powerlifting meet</span>
             </>
@@ -204,7 +204,7 @@ export function TerminalDialog({ items }: { items: TerminalWorkItem[] }) {
           }
           break;
         case "hs":
-          push("out", <>that one is my day job. try <span className="term-key-inline">open hubspot</span></>);
+          push("out", <>that was my last gig. try <span className="term-key-inline">open hubspot</span></>);
           break;
         case "vim":
         case "nvim":

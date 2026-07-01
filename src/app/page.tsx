@@ -38,7 +38,7 @@ export default function Home() {
               <SiteHeader />
             </div>
             <p className="rail-kicker load-item" style={{ ["--i" as string]: 1 }}>
-              Founding Engineer · NYC
+              Spur · New York
             </p>
           </div>
 
@@ -101,6 +101,10 @@ export default function Home() {
 
             <div className="about-details load-item" style={{ ["--i" as string]: 4 }}>
               <p className="bio-line">
+                <span className="bio-emoji">&#x1F680;</span>
+                <span>Founding engineer at <a href="https://spurtest.com" target="_blank" rel="noreferrer" className="inline-link text-[var(--text)]">Spur</a>, building <span className="highlight">autonomous browser agents</span> that test websites like real users</span>
+              </p>
+              <p className="bio-line">
                 <span className="bio-emoji">&#x1F6E0;&#xFE0F;</span>
                 <span>Previously built CLI tools, MCP servers, and agent infrastructure at <a href="https://hubspot.com" target="_blank" rel="noreferrer" className="inline-link text-[var(--text)]">HubSpot</a>, used by <span className="highlight">4,000+ developers</span> every week</span>
               </p>
@@ -114,11 +118,11 @@ export default function Home() {
               </p>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F3B6;</span>
-                <span>I love <HoverImage src="/images/concert-blue-lights.webp" alt="Music festival">EDM</HoverImage> and catching shows across the city. <HoverImage src="/images/dj-set-light-trails.webp" alt="DJing">DJing</HoverImage> whenever I get the chance.</span>
+                <span>I <HoverImage src="/images/dj-set-light-trails.webp" alt="DJing">DJ</HoverImage> and go to a lot of <HoverImage src="/images/concert-blue-lights.webp" alt="Music festival">shows</HoverImage>. My favorites this year have been Fred again... and Prospa. Also went to <span className="highlight">Ultra Miami</span> for the first time.</span>
               </p>
               <div className="music-block">
                 <p className="text-sm text-[var(--text-secondary)] leading-[1.75]">
-                  Rotating between{" "}
+                  I&apos;m rotating between{" "}
                   {PLAYLISTS.map((playlist, i) => (
                     <span key={`playlist-${i}`}>
                       {i > 0 && i < PLAYLISTS.length - 1 && ", "}
@@ -133,7 +137,7 @@ export default function Home() {
               </div>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F35C;</span>
-                <span>Always hunting for the best <HoverImage src="/images/nyc-burger-egg.webp" alt="NYC restaurant">restaurants</HoverImage> in New York. Right now it&apos;s <HoverImage src="/images/ci-siamo-birthday.webp" alt="Birthday dinner at Ci Siamo">Ci Siamo</HoverImage>. <span className="text-[var(--text-muted)]">(<a href="https://beliapp.com/app/chirag" target="_blank" rel="noreferrer" className="inline-link text-[var(--text-muted)]">@chirag on Beli</a>)</span></span>
+                <span>I&apos;m always looking for the best <HoverImage src="/images/nyc-burger-egg.webp" alt="NYC restaurant">restaurants</HoverImage> in New York. Right now it&apos;s <HoverImage src="/images/ci-siamo-birthday.webp" alt="Birthday dinner at Ci Siamo">Ci Siamo</HoverImage>. <span className="text-[var(--text-muted)]">(<a href="https://beliapp.com/app/chirag" target="_blank" rel="noreferrer" className="inline-link text-[var(--text-muted)]">@chirag on Beli</a>)</span></span>
               </p>
             </div>
 

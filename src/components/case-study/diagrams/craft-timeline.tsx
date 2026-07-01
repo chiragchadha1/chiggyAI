@@ -23,7 +23,7 @@ export function CraftTimeline() {
       viewBox={`0 0 ${width} ${height}`}
       className="diagram-svg"
       role="img"
-      aria-label="Craft timeline from 2017 to 2026: graphic design, then motion graphics in After Effects and Cinema 4D, then client promo videos, then full-stack web work, then agentic AI products under Chiggy AI."
+      aria-label="Craft timeline from 2017 to 2026: graphic design, then motion graphics in After Effects and Cinema 4D, then client promo videos, then full-stack web work, then agentic AI products under chiggyAI."
       xmlns="http://www.w3.org/2000/svg"
     >
       <line

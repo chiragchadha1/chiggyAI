@@ -16,6 +16,7 @@ export interface CaseStudyMeta {
   metrics: Metric[];
   stack?: string[];
   links: RepoLink[];
+  logo?: string;
   gallery?: Photo[];
   visual?: VisualKey;
   /**

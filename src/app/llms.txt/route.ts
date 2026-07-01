@@ -13,9 +13,9 @@ export function GET() {
 
   const body = `# Chirag Chadha
 
-> Founding engineer and builder in New York City. Previously at HubSpot (Developer
+> Founding engineer at Spur and builder in New York City. Previously at HubSpot (Developer
 > Experience), where he shipped CLI tools, MCP servers, and agent infrastructure used by
-> 4,000+ developers every week. Founder of Chiggy AI.
+> 4,000+ developers every week. Founder of chiggyAI.
 
 Contact: hi@chiggy.ai
 Site: https://chiggy.ai
@@ -36,7 +36,7 @@ Protocol (MCP), AI agents and LLM tooling, Stripe, Supabase, Playwright.
   config/auth flows, and agent-first developer platform surfaces at HubSpot (2024-2026).
 - chiggyOS is Chirag's personal agent operating system: Obsidian plus plain-text memory,
   Claude Code, cron jobs, Telegram workflows, and human-in-the-loop review.
-- Chiggy AI grew out of DEFYE, a freelance creative studio Chirag started in high school
+- chiggyAI grew out of DEFYE, a freelance creative studio Chirag started in high school
   that served 50+ clients and earned roughly $25k.
 - Chirag is also a DJ, powerlifter, traveler, and NYC food/music person; the site is meant
   to show the full person behind the engineering work.
