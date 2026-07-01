@@ -916,14 +916,14 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 1024px) {
   .home-grid {
     display: grid;
-    grid-template-columns: 320px minmax(0, 1fr);
-    column-gap: 80px;
+    grid-template-columns: 200px minmax(0, 1fr);
+    column-gap: 56px;
     padding: 0 40px;
   }
 }
 @media (min-width: 1280px) {
   .home-grid {
-    column-gap: 112px;
+    column-gap: 72px;
     padding: 0 56px;
   }
 }
@@ -940,6 +940,7 @@ a { color: inherit; text-decoration: none; }
     display: flex;
     flex-direction: column;
     padding: 76px 0;
+    overflow: hidden;
   }
 }
 .rail-top {
@@ -973,7 +974,6 @@ a { color: inherit; text-decoration: none; }
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: none;
-  /* bleed to the screen edge so chips scroll flush instead of clipping mid-air */
   margin-inline: -24px;
   padding-inline: 24px;
 }
@@ -1010,9 +1010,6 @@ a { color: inherit; text-decoration: none; }
   }
   .rail-top {
     gap: 10px;
-  }
-  .availability {
-    margin-top: 6px;
   }
   .mobile-jump-nav {
     margin-top: 18px;
@@ -1270,6 +1267,9 @@ a { color: inherit; text-decoration: none; }
   justify-content: space-between;
   gap: 16px;
   cursor: pointer;
+}
+.cs-row-static {
+  cursor: default;
 }
 .cs-row-main {
   display: flex;

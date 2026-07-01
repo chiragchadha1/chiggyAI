@@ -115,8 +115,8 @@ export function TerminalDialog({ items }: { items: TerminalWorkItem[] }) {
         case "whoami":
           push(
             "out",
-            <>Chirag Chadha. Software engineer at HubSpot (Developer Experience), founder of
-            Chiggy AI, based in NYC. I build developer tools and the agents that use them.</>
+            <>Chirag Chadha. Founding engineer, previously at HubSpot (Developer Experience).
+            Based in NYC. I design and build developer tools, AI agents, and side projects.</>
           );
           break;
         case "work":
@@ -166,10 +166,9 @@ export function TerminalDialog({ items }: { items: TerminalWorkItem[] }) {
           push(
             "out",
             <>
-              <span className="term-row"><span className="term-dim">→</span>driving the Agent First CLI direction at HubSpot</span>
+              <span className="term-row"><span className="term-dim">→</span>starting a new role as a founding engineer</span>
               <span className="term-row"><span className="term-dim">→</span>building chiggyOS, my personal agent operating system</span>
-              <span className="term-row"><span className="term-dim">→</span>recovering from my first USAPL powerlifting meet (May 2026)</span>
-              <span className="term-row"><span className="term-dim">→</span>open to new opportunities, in person or hybrid in NYC</span>
+              <span className="term-row"><span className="term-dim">→</span>training for my next USAPL powerlifting meet</span>
             </>
           );
           break;
@@ -196,12 +195,12 @@ export function TerminalDialog({ items }: { items: TerminalWorkItem[] }) {
             push(
               "out",
               <>
-                ✓ access granted. email <a href="mailto:hi@chiggy.ai">hi@chiggy.ai</a> and
-                tell me you found the terminal.
+                already taken, but email <a href="mailto:hi@chiggy.ai">hi@chiggy.ai</a> anyway.
+                I like meeting people who find the terminal.
               </>
             );
           } else {
-            push("out", <>with great power… try <span className="term-key-inline">sudo hire-me</span></>);
+            push("out", <>with great power... try <span className="term-key-inline">sudo hire-me</span></>);
           }
           break;
         case "hs":

@@ -38,31 +38,22 @@ export default function Home() {
               <SiteHeader />
             </div>
             <p className="rail-kicker load-item" style={{ ["--i" as string]: 1 }}>
-              Software Engineer · Founder · NYC
+              Founding Engineer · NYC
             </p>
-            <div className="load-item" style={{ ["--i" as string]: 2 }}>
-              <a className="availability" href="mailto:hi@chiggy.ai" title="Email me">
-                <span className="availability-main">
-                  <span className="availability-dot" />
-                  Open to new opportunities
-                </span>
-                <span className="availability-detail">in-person or hybrid in NYC</span>
-              </a>
-            </div>
           </div>
 
-          <div className="rail-nav-wrap load-item" style={{ ["--i" as string]: 3 }}>
+          <div className="rail-nav-wrap load-item" style={{ ["--i" as string]: 2 }}>
             <RailNav />
           </div>
 
-          <nav className="mobile-jump-nav load-item" aria-label="Sections" style={{ ["--i" as string]: 3 }}>
+          <nav className="mobile-jump-nav load-item" aria-label="Sections" style={{ ["--i" as string]: 2 }}>
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
             <a href="#projects">Projects</a>
             <a href="#photos">Photos</a>
           </nav>
 
-          <div className="rail-bottom load-item" style={{ ["--i" as string]: 4 }}>
+          <div className="rail-bottom load-item" style={{ ["--i" as string]: 3 }}>
             <div className="rail-socials">
               <a href="https://x.com/chiggyio" target="_blank" rel="noreferrer" className="social-icon" title="X" aria-label="X"><XIcon /></a>
               <a href="https://github.com/chiragchadha1" target="_blank" rel="noreferrer" className="social-icon" title="GitHub" aria-label="GitHub"><GithubIcon /></a>
@@ -81,11 +72,11 @@ export default function Home() {
             <div className="about-hero">
               <div className="about-hero-text load-stagger">
                 <h2 className="hero-title load-item" style={{ ["--i" as string]: 1 }}>
-                  I build <span className="highlight">developer tools</span> and{" "}
-                  <span className="highlight">AI-native products</span>, and I ship them fast.
+                  I design and build <span className="highlight">developer tools</span>,{" "}
+                  <span className="highlight">AI agents</span>, and whatever I can&apos;t stop thinking about.
                 </h2>
                 <p className="hero-intro load-item" style={{ ["--i" as string]: 2 }}>
-                  Software engineer, founder, <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>, and <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage>{" "}in New York. I&apos;ve been designing and building things since I was 15.
+                  I&apos;ve been building things since I was 15. Founding engineer, <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>, and <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage>{" "}in New York.
                 </p>
                 <div className="cta-row load-item" style={{ ["--i" as string]: 3 }}>
                   <CopyEmail email="hi@chiggy.ai" />
@@ -111,11 +102,11 @@ export default function Home() {
             <div className="about-details load-item" style={{ ["--i" as string]: 4 }}>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F6E0;&#xFE0F;</span>
-                <span>Building developer tools at <a href="https://hubspot.com" target="_blank" rel="noreferrer" className="inline-link text-[var(--text)]">HubSpot</a> that <span className="highlight">4,000+ developers</span> use every week</span>
+                <span>Previously built CLI tools, MCP servers, and agent infrastructure at <a href="https://hubspot.com" target="_blank" rel="noreferrer" className="inline-link text-[var(--text)]">HubSpot</a>, used by <span className="highlight">4,000+ developers</span> every week</span>
               </p>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F9E0;</span>
-                <span>Creating <span className="highlight">chiggyOS</span>, a personal agent operating system where my notes, projects, and workflows become durable context</span>
+                <span>Building <span className="highlight">chiggyOS</span>, a personal operating system where my notes, projects, and daily life feed into an AI agent that actually knows my context</span>
               </p>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F3CB;&#xFE0F;</span>
