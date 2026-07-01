@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import type { CaseStudyMeta } from "@/content/work/types";
 
+import * as spur from "./spur.mdx";
 import * as hubspot from "./hubspot.mdx";
 import * as anlyst from "./anlyst.mdx";
 import * as generate from "./generate.mdx";
@@ -14,7 +15,7 @@ export interface CaseStudyModule {
   Body: ComponentType;
 }
 
-const modules = [hubspot, anlyst, generate, chiggyAi, chiggyos, bagelCafe, seated] as const;
+const modules = [spur, hubspot, anlyst, generate, chiggyAi, chiggyos, bagelCafe, seated] as const;
 
 const ALL: CaseStudyModule[] = modules.map((m) => ({
   meta: m.meta as CaseStudyMeta,
@@ -49,6 +50,7 @@ const bySection = (kind: CaseStudyMeta["kind"]): CaseStudyModule[] =>
 export const allCaseStudies = (): CaseStudyModule[] => ALL.filter((m) => !m.meta.hidden);
 export const projects = (): CaseStudyModule[] => bySection("project");
 export const experience = (): CaseStudyModule[] => bySection("experience");
-export const visibleSlugs = (): string[] => allCaseStudies().map((m) => m.meta.slug);
+export const visibleSlugs = (): string[] =>
+  allCaseStudies().filter((m) => !m.meta.noDetailPage).map((m) => m.meta.slug);
 export const getCaseStudy = (slug: string): CaseStudyModule | undefined =>
-  allCaseStudies().find((m) => m.meta.slug === slug);
+  allCaseStudies().find((m) => m.meta.slug === slug && !m.meta.noDetailPage);

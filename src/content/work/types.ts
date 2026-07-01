@@ -23,4 +23,9 @@ export interface CaseStudyMeta {
    * returns 404. One-line kill switch (used for Seated's TOS-sensitive content).
    */
   hidden?: boolean;
+  /**
+   * When true: appears on the homepage but doesn't link to a detail page.
+   * Used for roles that haven't started yet (no case study content to show).
+   */
+  noDetailPage?: boolean;
 }

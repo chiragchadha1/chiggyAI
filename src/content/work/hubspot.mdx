@@ -4,16 +4,15 @@ export const meta = {
   kind: "experience",
   org: "HubSpot",
   role: "Software Engineer, Developer Experience",
-  when: "2024 -",
-  status: "active",
+  when: "2025 - 2026",
+  status: "completed",
   order: 1,
   tagline:
-    "Developer tools used by 4,000+ developers every week, and the MCP server that grew the community 425%.",
+    "Owned the developer tools that 4,000+ developers rely on every week. Built the MCP server, redesigned authentication from scratch, and shaped how the platform thinks about AI agents.",
   metrics: [
-    { value: "+425%", label: "quarterly active developers", sub: "346 to 1,817, 72% week-4 retention" },
-    { value: "4,000+", label: "developers every week" },
-    { value: "97%", label: "config success rate", sub: "up from 65% on the legacy flow" },
-    { value: "161", label: "files in the logging refactor" },
+    { value: "+425%", label: "quarterly active developers", sub: "72% still active after 4 weeks" },
+    { value: "4,000+", label: "developers using the tools weekly" },
+    { value: "70k", label: "weekly active AI connector users", sub: "188% growth across the platform" },
   ],
   stack: ["TypeScript", "Node", "React Ink", "MCP", "Claude Code"],
   links: [
@@ -32,56 +31,119 @@ export const meta = {
 
 ## The problem
 
-HubSpot's developer platform is built and extended through the command line. As AI coding
-agents took off, developers scattered across Claude Code, Cursor, Codex, Gemini, and
-Windsurf, and none of those agents could actually talk to HubSpot. The tooling also carried
-years of debt: an insecure config format, inconsistent logging, and an onboarding flow that
-quietly failed for roughly a third of new developers.
+HubSpot's developer platform serves over 100,000 active developer accounts. Everything
+from building apps to deploying projects runs through a CLI and a set of shared libraries.
+The platform's direction was clear: make HubSpot accessible from every surface where
+developers work, and treat AI agents as first-class users alongside humans.
 
-## What I built
+When I joined the Developer Experience team, the tooling wasn't ready for that. The
+authentication system used an insecure config format. Logging was inconsistent across the
+entire codebase. About a third of new developers failed silently during onboarding. And
+none of the major AI coding agents (Claude Code, Cursor, Codex, Gemini, Windsurf) could
+interact with HubSpot at all. There was a real gap between where the platform was headed
+and where the developer tools actually were.
 
-I joined as a co-op and converted to full-time on the Developer Experience team. My biggest
-win was a Model Context Protocol server that lets agents drive the HubSpot platform
-directly, then the integrations that shipped it across all five major editors and agents.
+## MCP server and agent infrastructure
+
+I worked on the [HubSpot Developer MCP server](https://github.com/HubSpot/hubspot-cli),
+which gives AI agents direct access to the platform: creating projects, managing accounts,
+deploying builds, and running developer workflows without leaving the editor. I built
+several core MCP tools, added tool annotations so agents could understand each tool's
+behavior and side effects before calling it, wired up usage-based feedback tracking to
+measure real adoption patterns, and fixed issues where agents would hang indefinitely
+waiting for responses that never came.
 
 <Diagram name="agent-stack" />
 
-I also led the CLI's largest architectural project: a multi-repo overhaul of configuration
-management (`hs account link`) that replaced the insecure `hubspot.yml` with a structured
-`.hs/settings.json` model. I built the proof of concept, drove team buy-in, partnered with
-design on the UX, and applied seven design patterns (SRP, IoC, CQS, SoC, OCP, DRY, ISP) in
-the refactor, then broke a 3,800-line change into four cleanly reviewable pieces.
+I also designed a promotion system to drive MCP adoption across the CLI. The system detects
+whether a developer already has the MCP server configured (by checking actual config files
+rather than storing flags), respects per-surface cooldowns so developers aren't nagged, and
+tracks attribution to measure which surfaces actually convert to installs. I shipped the
+whole thing, from architecture to 8+ wired surfaces, in about a week.
 
-Alongside it I designed the core logging abstraction and migrated it across 161 files and
-roughly 5,000 lines, modernized the CLI from yargs to React Ink (owning the Table and List
-components in v8), and built the release-management command suite (`hs project release
-create / list / info`, plus a `--preview` flag on `hs project upload`) that replaced the
-deprecated deploy path.
+## Authentication overhaul
 
-<Code lang="ts" file="logger.ts">{`// one logging abstraction, adopted across 161 files
-const logger = createLogger("project:upload");
+I led the largest architectural project on the CLI: a full redesign of how developers
+authenticate and manage accounts.
 
-logger.debug("starting upload", { account, projectName });
-try {
-  await uploadProject(account, projectName);
-  logger.success("upload complete");
-} catch (err) {
-  logger.error(err, { hint: "run hs project logs for details" });
-}`}</Code>
+The old system stored credentials in a flat YAML file with no directory scoping. If you
+worked across multiple HubSpot portals (common for agencies and partners), there was nothing
+stopping you from pushing code to the wrong one. One agency partner I spoke with during
+customer validation had exactly this happen: they upgraded the CLI and accidentally
+deployed to a production portal four days later with no warning.
 
-## Going agent-first
+I designed and built a new model that scopes authenticated accounts to directories. You
+link an account to a project directory, and the CLI knows which portal to target based on
+where you're running it. I built the proof of concept, collaborated with design on the UX,
+ran three customer validation calls with agency partners (one managing over 1,000 portals),
+and iterated on the architecture based on their feedback.
 
-I now drive the "Agent First CLI" direction: rethinking the `hs` CLI as a deterministic
-surface that AI agents (not just humans) can call, and re-architecting the CLI and
-local-dev-lib repos to be agent-agnostic across tools like Claude Code and Codex. I also
-build internal developer-productivity automation, including a custom triage skill that
-closed 36 long-stale GitHub issues in a single session, and proactively measured the
-platform's agent-readiness by scoring our developer docs and surfacing the gaps.
+<Code lang="ts" file="targetDiscovery.ts">{`// shared target discovery — resolves which account to use
+// agents get a structured error instead of a prompt they can't answer
+const candidates = await discoverTargetCandidates({
+  accountFlag: options.account,
+  profileName: options.profile,
+  linkedAccounts: getLinkedAccounts(cwd),
+  globalDefault: getGlobalDefaultAccount(),
+});
+
+const selected = candidates.find(c => c.category === 'recommended');`}</Code>
+
+## CLI infrastructure
+
+I shipped a lot of foundational work that made the CLI better for both humans and agents:
+
+- **Logging system:** Designed a unified logging abstraction and migrated it across the
+  entire codebase (~160 files, ~5,000 lines). This was my second month on the job and it
+  required understanding how every command in the CLI worked.
+- **React Ink UI modernization:** Rebuilt the CLI's terminal output layer with React Ink,
+  including reusable Table and List components, a new Box layout system, and interactive
+  project creation flows. Shipped as part of CLI v8.
+- **Release management commands:** Built a new command suite for managing project releases,
+  designed for two distinct flows: marketplace releases (pushing updates to all users) and
+  local dev previews. I thought deeply about the UX here, mapping out how developers would
+  actually use these commands across different stages of their workflow.
+- **App installation from the CLI:** Closed a gap where developers had to leave the terminal
+  and open a browser to install their own app. I coordinated cross-team with the backend
+  platform team to get a new API endpoint built, then wired it into a new CLI command.
+- **State infrastructure:** Designed a type-safe state system for persisting CLI and MCP
+  data across sessions. Handles edge cases (corrupted files, missing keys, backwards
+  compatibility) automatically.
+- **VS Code extension:** Managed multiple releases, built the release automation script,
+  and published to the [Open VSX Registry](https://open-vsx.org/) so the extension works in
+  any VS Code-compatible editor (Cursor, Windsurf, and others).
+
+## Agent-first developer experience
+
+Toward the end of my time I led a new direction for the team: making the CLI work reliably
+when the user is an AI agent, not a human.
+
+The core question I framed: how does the CLI need to evolve when the user isn't always a
+person? Agents can't answer interactive prompts. They need structured output they can parse.
+They need deterministic account selection instead of ambient defaults. And they need clear
+error signals instead of vague log messages.
+
+I scoped the problem, broke it into three workstreams (CLI contracts, MCP tool quality,
+and agent-facing documentation), and built the foundational pieces: a shared utility for
+deterministic account resolution and a repo configuration that lets multiple AI tools
+(Claude Code, Codex, and others) work with the codebase interchangeably.
+
+The goal, and where HubSpot's platform is headed: agents are first-class users. Anything a
+developer can do in the UI, an agent should be able to do through the CLI and MCP.
+
+## On-call and cross-team work
+
+During one on-call rotation I closed 70+ stale GitHub issues (some 6+ years old), shipped
+14 PRs in five days, and fixed a crash in a repo my team didn't own. I also built a Claude
+Code automation that triaged and resolved 36 issues in a single 10-minute session, handling
+the tone and context for each response automatically.
 
 ## Impact
 
-The MCP server grew the developer community from 346 to 1,817 quarterly active developers,
-a 425% jump with 72% week-4 retention. The config overhaul moved first-run success from 65%
-to 97%. Tooling I own ships to more than 4,000 developers every week, across the CLI,
-local-dev-lib, and the VS Code extension. The work put me on a senior-engineer track,
-owning ambiguous, multi-repo projects end to end.
+The MCP server grew the quarterly active developer community by 425%, from 346 to over
+1,800 developers, with 72% still active after four weeks. Across the broader platform, AI
+connector usage grew 188% to 70,000 weekly active users. The authentication redesign
+dramatically improved the first-run experience for new developers. Tooling I worked on
+ships to more than 4,000 developers every week across the CLI, shared libraries, and the
+VS Code extension. In under a year I led 9 projects, cut 20+ releases, and shipped across
+8 repositories.

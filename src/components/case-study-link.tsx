@@ -9,8 +9,9 @@ import type { CaseStudyMeta } from "@/content/work/types";
  */
 export function CaseStudyLink({ meta }: { meta: CaseStudyMeta }) {
   const headline = meta.metrics[0];
-  return (
-    <a href={`/work/${meta.slug}`} className="project-row cs-row">
+
+  const inner = (
+    <>
       <div className="cs-row-main">
         <span className="cs-row-mono" aria-hidden="true">
           {meta.title.charAt(0)}
@@ -41,11 +42,23 @@ export function CaseStudyLink({ meta }: { meta: CaseStudyMeta }) {
             {headline.label}
           </span>
         )}
-        <span className="cs-row-cue">
-          case study
-          <ArrowRight />
-        </span>
+        {!meta.noDetailPage && (
+          <span className="cs-row-cue">
+            case study
+            <ArrowRight />
+          </span>
+        )}
       </div>
+    </>
+  );
+
+  if (meta.noDetailPage) {
+    return <div className="project-row cs-row cs-row-static">{inner}</div>;
+  }
+
+  return (
+    <a href={`/work/${meta.slug}`} className="project-row cs-row">
+      {inner}
     </a>
   );
 }
