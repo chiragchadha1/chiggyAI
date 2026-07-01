@@ -25,9 +25,9 @@ export const viewport: Viewport = {
 const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}})()`;
 
 export const metadata: Metadata = {
-  title: "Chirag Chadha | Software Engineer, Founder, DJ in New York",
+  title: "Chirag Chadha | Founding Engineer, Builder, DJ in New York",
   description:
-    "Chirag Chadha is a software engineer at HubSpot, founder of Chiggy AI, and DJ based in New York City. Building developer tools, AI systems, and spinning house music.",
+    "Chirag Chadha is a founding engineer and builder based in New York City. Previously at HubSpot (Developer Experience). Builds developer tools, AI agents, and side projects.",
   metadataBase: new URL("https://chiggy.ai"),
   alternates: {
     canonical: "/",
@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     "Chiggy AI",
   ],
   openGraph: {
-    title: "Chirag Chadha | Software Engineer, Founder, DJ",
+    title: "Chirag Chadha | Founding Engineer, Builder, DJ",
     description:
-      "Software engineer at HubSpot, founder of Chiggy AI, and DJ based in New York City. Building developer tools, AI systems, and spinning house music.",
+      "Founding engineer and builder based in New York City. Previously at HubSpot (Developer Experience). Developer tools, AI agents, and side projects.",
     url: "https://chiggy.ai",
     siteName: "Chirag Chadha",
     locale: "en_US",
@@ -72,9 +72,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chirag Chadha | Software Engineer, Founder, DJ",
+    title: "Chirag Chadha | Founding Engineer, Builder, DJ",
     description:
-      "Software engineer at HubSpot, founder of Chiggy AI, and DJ based in New York City.",
+      "Founding engineer and builder based in New York City. Previously at HubSpot. Developer tools, AI agents, and side projects.",
     creator: "@chiggyio",
     images: ["/og.png"],
   },
@@ -102,13 +102,13 @@ function JsonLd() {
     alternateName: ["Chirag K Chadha", "chiggy", "chiggyio"],
     url: "https://chiggy.ai",
     email: "hi@chiggy.ai",
-    jobTitle: "Software Engineer",
+    jobTitle: "Founding Applied AI Product Engineer",
     description:
-      "New York-based software engineer at HubSpot and founder of Chiggy AI. Builds developer tools, agent workflows, MCP systems, and zero-to-one products.",
+      "New York-based founding engineer at Spur, previously at HubSpot (Developer Experience). Builds developer tools, AI agents, and side projects.",
     worksFor: {
       "@type": "Organization",
-      name: "HubSpot",
-      url: "https://hubspot.com",
+      name: "Spur",
+      url: "https://spurtest.com",
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",
@@ -142,7 +142,7 @@ function JsonLd() {
       },
     ],
     knowsLanguage: ["en"],
-    seeks: "In-person or hybrid software engineering and founding-engineer roles in New York City",
+    seeks: "",
     knowsAbout: [
       "Software Engineering",
       "Full-Stack Development",
@@ -179,7 +179,7 @@ function JsonLd() {
       url: "https://chiggy.ai",
     },
     description:
-      "Chiggy AI is Chirag Chadha's AI-forward software and design studio for full-stack products, automation, and agentic tooling.",
+      "Chiggy AI is Chirag Chadha's software and design studio. Full-stack products, automation, and developer tooling.",
   };
   const chiggyOsSchema = {
     "@context": "https://schema.org",
