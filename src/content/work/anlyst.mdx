@@ -8,7 +8,7 @@ export const meta = {
   status: "completed",
   order: 2,
   tagline:
-    "Consumer AI fighting decision fatigue with stateful agents that actually remember you.",
+    "A consumer app that helps people make better decisions. Agents that remember your preferences and actually follow up.",
   metrics: [
     { value: "200+", label: "waitlist sign-ups" },
     { value: "3+", label: "VC conversations" },
@@ -26,17 +26,16 @@ chatbot.
 
 ## What I built
 
-As CTO of a two-person founding team, I architected a three-layer system around a simple
-formula: collect, understand, act. The **Vault** securely aggregates a user's data across
-apps; the **Mirror** turns it into personal context through a correlation and
-activity-recognition engine; the **Persona** is the agent that acts proactively on the
-user's behalf.
+As CTO of a two-person founding team, I designed the system in three layers: a **Vault**
+that pulls your real data from apps like Whoop, Apple Health, Google Calendar, and
+MyFitnessPal; a **Mirror** that turns raw data into personal context (correlating sleep,
+activity, and schedule patterns); and a **Persona** that acts on what it knows about you,
+not generic advice.
 
 <Diagram name="vault-mirror-persona" />
 
-The MVP pulled real signal from Whoop, Apple Health, Google Calendar, and MyFitnessPal so
-the agent reasoned from your actual life, not generic advice. Data security, transparency,
-and user control were first-class product principles.
+The whole point was that the agent should reason from your actual life. If you slept poorly
+and have a packed calendar, it should know that without you having to say it.
 
 ## Impact
 
