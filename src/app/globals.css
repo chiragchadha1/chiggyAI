@@ -1163,10 +1163,25 @@ a { color: inherit; text-decoration: none; }
 }
 .cta-row {
   margin-top: 22px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.cta-row .copy-email { grid-column: 1 / -1; }
+.cta-row .copy-email,
+.cta-row .cta-secondary { justify-content: center; }
+.cta-row .rail-divider {
+  display: none;
+  margin: 0;
+}
+/* Container query, not media: the hero column narrows when the portrait and rail appear. */
+.about-hero-text { container-type: inline-size; }
+@container (min-width: 420px) {
+  .cta-row {
+    display: flex;
+    align-items: center;
+  }
+  .cta-row .rail-divider { display: inline; }
 }
 .about-hero-portrait {
   justify-self: start;
@@ -1627,12 +1642,16 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── Diagrams ── */
+/* On narrow screens diagrams keep their drawn size and scroll sideways, so labels stay readable */
 .cs-diagram {
   margin: 24px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 .diagram-svg {
   display: block;
   width: 100%;
+  min-width: 640px;
   height: auto;
 }
 /* Elements marked data-anim stagger in when the diagram scrolls into view */
@@ -2008,9 +2027,10 @@ a { color: inherit; text-decoration: none; }
     animation: none;
   }
 }
-/* Keyboard shortcut chip means nothing on touch devices */
+/* Keyboard shortcut chips mean nothing on touch devices */
 @media (pointer: coarse) {
-  .hint-kbd {
+  .hint-kbd,
+  .copy-email-kbd {
     display: none;
   }
 }
@@ -2060,6 +2080,10 @@ a { color: inherit; text-decoration: none; }
 }
 .cmdk-input::placeholder {
   color: var(--text-muted);
+}
+/* 16px stops iOS from zooming the page when the input focuses */
+@media (pointer: coarse) {
+  .cmdk-input { font-size: 16px; }
 }
 .cmdk-list {
   overflow-y: auto;

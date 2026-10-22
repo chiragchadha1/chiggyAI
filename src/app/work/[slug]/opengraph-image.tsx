@@ -18,7 +18,7 @@ export default async function Image({
   const meta = getCaseStudy(slug)?.meta;
 
   const title = meta?.title ?? "Chirag Chadha";
-  const tagline = meta?.tagline ?? "Software engineer and builder in New York.";
+  const tagline = meta?.tagline ?? "Founding engineer, powerlifter, and DJ in New York.";
   const kind = (meta?.kind ?? "").toUpperCase();
   const metrics = (meta?.metrics ?? []).slice(0, 3);
 

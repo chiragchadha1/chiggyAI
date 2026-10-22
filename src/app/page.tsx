@@ -76,11 +76,16 @@ export default function Home() {
                   <span className="highlight">AI agents</span>, and whatever I can&apos;t stop thinking about.
                 </h2>
                 <p className="hero-intro load-item" style={{ ["--i" as string]: 2 }}>
-                  I&apos;ve been building things since I was 15. Founding engineer, <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>, and <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage>{" "}in New York.
+                  I&apos;ve been building things since I was 15. Founding engineer, <HoverImage src="/images/powerlifting-deadlift.webp" alt="Chirag deadlifting">powerlifter</HoverImage>, and <HoverImage src="/images/dj-set-solo.webp" alt="Chirag DJing">DJ</HoverImage>{" "}in New York.
                 </p>
                 <div className="cta-row load-item" style={{ ["--i" as string]: 3 }}>
                   <CopyEmail email="hi@chiggy.ai" />
-                  <span className="text-xs text-[var(--text-muted)]">or</span>
+                  <span className="rail-divider" aria-hidden="true">/</span>
+                  <a href="/meet" target="_blank" rel="noreferrer" className="cta-secondary">
+                    meet with me
+                    <ArrowUpRight />
+                  </a>
+                  <span className="rail-divider" aria-hidden="true">/</span>
                   <a href="https://x.com/chiggyio" target="_blank" rel="noreferrer" className="cta-secondary">
                     find me on X
                     <ArrowUpRight />
@@ -114,7 +119,7 @@ export default function Home() {
               </p>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F3CB;&#xFE0F;</span>
-                <span>Competed at my first <span className="highlight">USAPL powerlifting meet</span> in May 2026</span>
+                <span>Preparing for my second <span className="highlight">powerlifting competition</span></span>
               </p>
               <p className="bio-line">
                 <span className="bio-emoji">&#x1F3B6;</span>

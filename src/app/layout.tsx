@@ -25,9 +25,9 @@ export const viewport: Viewport = {
 const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="light"}})()`;
 
 export const metadata: Metadata = {
-  title: "Chirag Chadha | Founding Engineer, Builder, DJ in New York",
+  title: "Chirag Chadha | Founding Engineer, Powerlifter, and DJ in New York",
   description:
-    "Chirag Chadha is a founding engineer and builder based in New York City. Previously at HubSpot (Developer Experience). Builds developer tools, AI agents, and side projects.",
+    "Chirag Chadha is a founding engineer at Spur, powerlifter, and DJ based in New York City. Previously at HubSpot (Developer Experience). Builds developer tools, AI agents, and side projects.",
   metadataBase: new URL("https://chiggy.ai"),
   alternates: {
     canonical: "/",
@@ -54,29 +54,20 @@ export const metadata: Metadata = {
     "chiggyAI",
   ],
   openGraph: {
-    title: "Chirag Chadha | Founding Engineer, Builder, DJ",
+    title: "Chirag Chadha | Founding Engineer, Powerlifter, and DJ",
     description:
-      "Founding engineer and builder based in New York City. Previously at HubSpot (Developer Experience). Developer tools, AI agents, and side projects.",
+      "Founding engineer at Spur, powerlifter, and DJ based in New York City. Previously at HubSpot (Developer Experience). Developer tools, AI agents, and side projects.",
     url: "https://chiggy.ai",
     siteName: "Chirag Chadha",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Chirag Chadha - Founding Engineer, Builder, DJ in New York",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Chirag Chadha | Founding Engineer, Builder, DJ",
+    title: "Chirag Chadha | Founding Engineer, Powerlifter, and DJ",
     description:
-      "Founding engineer and builder based in New York City. Previously at HubSpot. Developer tools, AI agents, and side projects.",
+      "Founding engineer at Spur, powerlifter, and DJ based in New York City. Previously at HubSpot. Developer tools, AI agents, and side projects.",
     creator: "@chiggyio",
-    images: ["/og.png"],
   },
   robots: {
     index: true,
@@ -142,7 +133,6 @@ function JsonLd() {
       },
     ],
     knowsLanguage: ["en"],
-    seeks: "",
     knowsAbout: [
       "Software Engineering",
       "Full-Stack Development",
